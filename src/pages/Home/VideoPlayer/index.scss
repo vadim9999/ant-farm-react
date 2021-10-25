@@ -1,0 +1,24 @@
+.videoPlayer {
+  width: 640px;
+  height: 480px;
+  background: black;
+
+  #fullScreen {
+    background: black;
+    // width: auto;
+    // height: auto;
+    width: 640px;
+  height: 480px;
+    position: relative;
+
+    .controls {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+
+      
+    }
+  }
+}

@@ -10,7 +10,7 @@ const AppLayout = () => {
     <Layout>
       <Header
         className="header"
-        style={{ position: "fixed", zIndex: 1, width: "100%" }}
+        // style={{ position: "fixed", zIndex: 1, width: "100%" }}
       >
         <div className="logo" />
         Header
@@ -41,7 +41,7 @@ const AppLayout = () => {
           </Menu>
         </Sider>
 
-        <Layout style={{ padding: "0 24px 24px" }}>
+        <Layout style={{ padding: "0 24px 24px", marginLeft: '200px' }}>
           <Content
             className="site-layout-background"
             style={{
