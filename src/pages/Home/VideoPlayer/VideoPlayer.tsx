@@ -10,7 +10,15 @@ import {
 import React from "react";
 import "./index.scss";
 
+import { postStartPreview } from "api/api";
+import { useLocation, useParams, useRouteMatch } from "react-router";
+import { getUserId } from "utils/utils";
+
 const VideoPlayer = () => {
+  const location = useLocation();
+  const match = useLocation();
+  console.log("location", getUserId(location.search));
+
   const menu = (
     <Menu>
       <Menu.Item key="0">720 HD</Menu.Item>
@@ -18,6 +26,31 @@ const VideoPlayer = () => {
       <Menu.Item key="3">240</Menu.Item>
     </Menu>
   );
+
+  const onFullScreen = () => {
+    var fullScreen = document.getElementById("fullScreen");
+
+    // @ts-ignoreignore
+    fullScreen?.webkitRequestFullScreen();
+    // @ts-ignoreignore
+    if (document?.webkitFullscreenElement) {
+      // @ts-ignoreignore
+      document.webkitCancelFullScreen();
+      var image = document.getElementById("badge");
+      image?.setAttribute("width", "640");
+      image?.setAttribute("height", "480");
+    } else {
+      // @ts-ignoreignore
+      fullScreen?.webkitRequestFullScreen();
+      const image = document.getElementById("badge");
+      image?.setAttribute("width", "100%");
+      image?.setAttribute("height", "100%");
+    }
+  };
+
+  const onStartPreview = () => {
+    postStartPreview({ userId: getUserId(location.search) });
+  };
 
   return (
     <div className="videoPlayer">
@@ -29,7 +62,7 @@ const VideoPlayer = () => {
               type="primary"
               icon={<PlayCircleOutlined />}
               size="large"
-              // onClick="startPreview();"
+              onClick={onStartPreview}
             />
 
             <Button
@@ -49,7 +82,7 @@ const VideoPlayer = () => {
               type="primary"
               icon={<FullscreenOutlined />}
               size="large"
-              // onClick="onFullScreen();"
+              onClick={onFullScreen}
             />
           </div>
         </div>
