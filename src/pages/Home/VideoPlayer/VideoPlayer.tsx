@@ -107,6 +107,7 @@ const VideoPlayer = () => {
       <div id="fullScreen">
         {state.imageUrl && (
           <img
+            id="badge"
             src={state.imageUrl}
             width="640"
             height="480"
