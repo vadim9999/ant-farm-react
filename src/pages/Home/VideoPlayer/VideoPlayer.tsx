@@ -1,4 +1,5 @@
-import { Button, Dropdown, Menu } from "antd";
+import React, { useReducer, useState } from "react";
+import { Button, Dropdown, Menu, MenuProps } from "antd";
 import {
   BorderOutlined,
   FullscreenOutlined,
@@ -7,25 +8,36 @@ import {
   PlayCircleOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
-import React from "react";
 import "./index.scss";
 
-import { postStartPreview } from "api/api";
+import { API_URL, startPreview, stopPreview } from "api/api";
 import { useLocation, useParams, useRouteMatch } from "react-router";
 import { getUserId } from "utils/utils";
+import { VideoResolution } from "types";
+
+interface State {
+  imageUrl: string;
+  isStartedPreview: boolean;
+  currentResolution: VideoResolution;
+}
 
 const VideoPlayer = () => {
   const location = useLocation();
   const match = useLocation();
+  const [state, setState] = useReducer(
+    (prevState: State, nextState: Partial<State>): State => ({
+      ...prevState,
+      ...nextState,
+    }),
+    {
+      imageUrl: "",
+      isStartedPreview: false,
+      currentResolution: VideoResolution.Q480,
+    }
+  );
   console.log("location", getUserId(location.search));
 
-  const menu = (
-    <Menu>
-      <Menu.Item key="0">720 HD</Menu.Item>
-      <Menu.Item key="1">480</Menu.Item>
-      <Menu.Item key="3">240</Menu.Item>
-    </Menu>
-  );
+  const userId = getUserId(location.search);
 
   const onFullScreen = () => {
     var fullScreen = document.getElementById("fullScreen");
@@ -48,21 +60,67 @@ const VideoPlayer = () => {
     }
   };
 
-  const onStartPreview = () => {
-    postStartPreview({ userId: getUserId(location.search) });
+  const onStartPreview =
+    ({ resolution }: { resolution: VideoResolution }) =>
+    () => {
+      startPreview({ userId, resolution }).then(() => {
+        const streamUrl = `${API_URL}/stream.mjpg?id=${userId}`;
+
+        setState({
+          imageUrl: streamUrl,
+          isStartedPreview: true,
+        });
+      });
+    };
+
+  const onStopPreview = () => {
+    return stopPreview({ userId }).then(() => {
+      setState({
+        imageUrl: "",
+        isStartedPreview: false,
+      });
+    });
   };
+
+  const onChangeQuality: MenuProps["onClick"] = (e) => {
+    if (state.isStartedPreview) {
+      onStopPreview().then(() => {
+        setTimeout(function () {
+          onStartPreview({ resolution: e.key as VideoResolution })();
+        }, 1000);
+      });
+    }
+    console.log("e", e.key);
+    setState({ currentResolution: e.key as VideoResolution });
+  };
+
+  const menu = (
+    <Menu selectedKeys={[state.currentResolution]} onClick={onChangeQuality}>
+      <Menu.Item key={VideoResolution.Q720}>720 HD</Menu.Item>
+      <Menu.Item key={VideoResolution.Q480}>480</Menu.Item>
+      <Menu.Item key={VideoResolution.Q240}>240</Menu.Item>
+    </Menu>
+  );
 
   return (
     <div className="videoPlayer">
       <div id="fullScreen">
-        <img id="badge" width="640" height="480" alt="Video" />
+        {state.imageUrl && (
+          <img
+            src={state.imageUrl}
+            width="640"
+            height="480"
+            alt="Video"
+          />
+        )}
         <div className="controls">
           <div>
             <Button
               type="primary"
               icon={<PlayCircleOutlined />}
               size="large"
-              onClick={onStartPreview}
+              onClick={onStartPreview({ resolution: state.currentResolution })}
+              disabled={state.isStartedPreview}
             />
 
             <Button
@@ -70,8 +128,8 @@ const VideoPlayer = () => {
               danger
               icon={<PauseOutlined />}
               size="large"
-              disabled
-              // onClick="stopPreview();"
+              onClick={onStopPreview}
+              disabled={!state.isStartedPreview}
             />
           </div>
           <div>
