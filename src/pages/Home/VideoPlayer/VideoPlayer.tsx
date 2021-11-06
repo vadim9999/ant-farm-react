@@ -21,7 +21,11 @@ interface State {
   currentResolution: VideoResolution;
 }
 
-const VideoPlayer = () => {
+interface Props {
+  isStartedRecording: boolean;
+}
+
+const VideoPlayer = ({ isStartedRecording }: Props) => {
   const location = useLocation();
   const match = useLocation();
   const [state, setState] = useReducer(
@@ -121,7 +125,7 @@ const VideoPlayer = () => {
               icon={<PlayCircleOutlined />}
               size="large"
               onClick={onStartPreview({ resolution: state.currentResolution })}
-              disabled={state.isStartedPreview}
+              disabled={state.isStartedPreview || isStartedRecording}
             />
 
             <Button
