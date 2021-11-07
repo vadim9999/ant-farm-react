@@ -1,7 +1,8 @@
 import { PauseOutlined, PlayCircleOutlined } from "@ant-design/icons";
 import { Button, Input, Modal, Select } from "antd";
 import { startRecording, stopRecording } from "api/api";
-import React, { useState } from "react";
+import { GlobalContext } from "context/GlobalContextComponent";
+import React, { useContext, useState } from "react";
 import { useLocation } from "react-router";
 import { getUserId } from "utils/utils";
 import { FormValues } from "./VideoRecordingForm/types";
@@ -9,11 +10,8 @@ import VideoRecordingForm from "./VideoRecordingForm/VideoRecordingForm";
 
 const { Option } = Select;
 
-interface Props {
-  onStartRecording: (value: boolean) => void;
-}
-
-const VideoRecording = ({ onStartRecording }: Props) => {
+const VideoRecording = () => {
+  const { dispatch } = useContext(GlobalContext);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
   const location = useLocation();
@@ -35,7 +33,7 @@ const VideoRecording = ({ onStartRecording }: Props) => {
     }).then(() => {
       setIsModalVisible(false);
       setIsRecording(true);
-      onStartRecording(true);
+      dispatch({ isRecording: true });
     });
   };
 

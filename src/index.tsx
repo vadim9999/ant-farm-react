@@ -1,4 +1,5 @@
 import AppLayout from "AppLayout";
+import GlobalContext from "context/GlobalContextComponent";
 import React from "react";
 import ReactDOM from "react-dom";
 // import "./index.css";
@@ -7,7 +8,9 @@ import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    <AppLayout />
+    <GlobalContext>
+      <AppLayout />
+    </GlobalContext>
   </React.StrictMode>,
   document.getElementById("root")
 );

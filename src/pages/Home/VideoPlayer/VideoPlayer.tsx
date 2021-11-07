@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { useContext, useReducer, useState } from "react";
 import { Button, Dropdown, Menu, MenuProps } from "antd";
 import {
   BorderOutlined,
@@ -14,6 +14,7 @@ import { API_URL, startPreview, stopPreview } from "api/api";
 import { useLocation, useParams, useRouteMatch } from "react-router";
 import { getUserId } from "utils/utils";
 import { VideoResolution } from "types";
+import { GlobalContext } from "context/GlobalContextComponent";
 
 interface State {
   imageUrl: string;
@@ -21,11 +22,10 @@ interface State {
   currentResolution: VideoResolution;
 }
 
-interface Props {
-  isStartedRecording: boolean;
-}
+const VideoPlayer = () => {
+  const { globalState } = useContext(GlobalContext);
+  console.log("globalContext", globalState);
 
-const VideoPlayer = ({ isStartedRecording }: Props) => {
   const location = useLocation();
   const match = useLocation();
   const [state, setState] = useReducer(
@@ -125,7 +125,7 @@ const VideoPlayer = ({ isStartedRecording }: Props) => {
               icon={<PlayCircleOutlined />}
               size="large"
               onClick={onStartPreview({ resolution: state.currentResolution })}
-              disabled={state.isStartedPreview || isStartedRecording}
+              disabled={state.isStartedPreview || globalState.isRecording}
             />
 
             <Button

@@ -1,19 +1,22 @@
-import React, { useContext, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useMemo,
+  useReducer,
+  useState,
+} from "react";
+import GlobalContext from "context/GlobalContextComponent";
 import CreatePicture from "./CreatePicture/CreatePicture";
 import StreamingControls from "./StreamingControls/StreamingControls";
 import VideoPlayer from "./VideoPlayer/VideoPlayer";
 import VideoRecording from "./VideoRecording/VideoRecording";
 
 const Home = () => {
-  // const context = useContext({d});
-  // TODO add useContext
-
-  const [isStartedRecording, setIsStartedRecording] = useState(false);
   return (
     <div>
-      <VideoPlayer isStartedRecording={isStartedRecording} />
+      <VideoPlayer />
       <StreamingControls />
-      <VideoRecording onStartRecording={() => setIsStartedRecording(true)} />
+      <VideoRecording />
       <CreatePicture />
     </div>
   );
