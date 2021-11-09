@@ -1,19 +1,26 @@
 import axios from "axios";
 import { VideoResolution } from "types";
-import { StartPreview, StartRecording, StopPreview, StopRecording } from "./types";
+import {
+  StartPreview,
+  StartRecording,
+  StopPreview,
+  StopRecording,
+} from "./types";
 
 // const API_URL = document.location.protocol + "//" + document.location.host;
 export const API_URL = "http://raspberrypi.local";
 
+// {
+//   headers: {
+//     // Accept: "*/*",
+//     // "Access-Control-Allow-Origin": "*",
+//     "Content-Type": "text/plain",
+//     // mode: "no-cors",
+//   },
+// }
+
 export const startPreview = ({ userId, resolution }: StartPreview) =>
-  axios.post(`${API_URL}/start?id=${userId}`, resolution, {
-    headers: {
-      // Accept: "*/*",
-      // "Access-Control-Allow-Origin": "*",
-      "Content-Type": "text/plain",
-      // mode: "no-cors",
-    },
-  });
+  axios.post(`${API_URL}/start?id=${userId}`, resolution);
 
 export const stopPreview = ({ userId }: StopPreview) =>
   axios.get(`${API_URL}/stop?id=${userId}`);
@@ -25,12 +32,7 @@ export const startRecording = ({
 }: StartRecording) =>
   axios.post(
     `${API_URL}/start_record?id=${userId}`,
-    JSON.stringify({ resolution, filename }),
-    {
-      headers: {
-        "Content-Type": "text/plain",
-      },
-    }
+    JSON.stringify({ resolution, filename })
   );
 
 export const stopRecording = ({ userId }: StopRecording) =>
