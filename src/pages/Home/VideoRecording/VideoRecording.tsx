@@ -11,9 +11,9 @@ import VideoRecordingForm from "./VideoRecordingForm/VideoRecordingForm";
 const { Option } = Select;
 
 const VideoRecording = () => {
-  const { dispatch } = useContext(GlobalContext);
+  const { dispatch, globalState } = useContext(GlobalContext);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isRecording, setIsRecording] = useState(false);
+  // const [isRecording, setIsRecording] = useState(false);
   const location = useLocation();
   const userId = getUserId(location.search);
 
@@ -30,10 +30,9 @@ const VideoRecording = () => {
       userId,
       resolution: values.quality,
       filename: values.filename,
-    }).then(() => {
-      setIsModalVisible(false);
-      setIsRecording(true);
+    }).then(() => {      
       dispatch({ isRecording: true });
+      setIsModalVisible(false);
     });
   };
 
@@ -42,14 +41,16 @@ const VideoRecording = () => {
   };
 
   const onStopRecording = () => {
-    stopRecording({ userId }).finally(() => {
-      setIsRecording(false);
+    stopRecording({ userId }).then(() => {
+      dispatch({ isRecording: false });
     });
   };
 
+  // TODO move text of buttons into object
+  // TODO add timer in button
   return (
     <div>
-      {isRecording ? (
+      {globalState.isRecording ? (
         <Button
           type="primary"
           danger
