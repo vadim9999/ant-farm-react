@@ -2,6 +2,7 @@ import React, { createContext, useMemo, useReducer } from "react";
 
 interface GlobalState {
   isRecording: boolean;
+  isStartedPreview: boolean;
 }
 
 interface ICreateContext {
@@ -10,7 +11,7 @@ interface ICreateContext {
 }
 
 export const GlobalContext = React.createContext<ICreateContext>({
-  globalState: { isRecording: false },
+  globalState: { isRecording: false, isStartedPreview: false },
   dispatch: () => {},
 });
 
@@ -18,6 +19,7 @@ interface IGlobalContextComponent {
   children: React.ReactNode;
 }
 
+// TODO find better name
 const GlobalContextComponent = ({ children }: IGlobalContextComponent) => {
   const [globalState, dispatch] = useReducer(
     (
@@ -29,6 +31,7 @@ const GlobalContextComponent = ({ children }: IGlobalContextComponent) => {
     }),
     {
       isRecording: false,
+      isStartedPreview: false,
     }
   );
   const contextValue = useMemo(() => {
