@@ -32,7 +32,8 @@ export const startRecording = ({
 }: StartRecording) =>
   axios.post(
     `${API_URL}/start_record?id=${userId}`,
-    JSON.stringify({ resolution, filename })
+    JSON.stringify({ resolution, filename }),
+    // { timeout: 10000 }
   );
 
 export const stopRecording = ({ userId }: StopRecording) =>
