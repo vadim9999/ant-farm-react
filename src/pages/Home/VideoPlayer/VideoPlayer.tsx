@@ -15,15 +15,10 @@ import { useLocation, useParams, useRouteMatch } from "react-router";
 import { getUserId } from "utils/utils";
 import { VideoResolution } from "types";
 import { GlobalContext } from "context/GlobalContextComponent";
-
-interface State {
-  imageUrl: string;
-  isStartedPreview: boolean;
-  currentResolution: VideoResolution;
-}
+import { State } from "./typesVideoPlayer";
 
 const VideoPlayer = () => {
-  const { globalState } = useContext(GlobalContext);
+  const { globalState, dispatch } = useContext(GlobalContext);
   console.log("globalContext", globalState);
 
   const location = useLocation();
@@ -35,7 +30,6 @@ const VideoPlayer = () => {
     }),
     {
       imageUrl: "",
-      isStartedPreview: false,
       currentResolution: VideoResolution.Q480,
     }
   );
@@ -72,8 +66,8 @@ const VideoPlayer = () => {
 
         setState({
           imageUrl: streamUrl,
-          isStartedPreview: true,
         });
+        dispatch({ isStartedPreview: true });
       });
     };
 
@@ -81,13 +75,13 @@ const VideoPlayer = () => {
     return stopPreview({ userId }).then(() => {
       setState({
         imageUrl: "",
-        isStartedPreview: false,
       });
+      dispatch({ isStartedPreview: false });
     });
   };
 
   const onChangeQuality: MenuProps["onClick"] = (e) => {
-    if (state.isStartedPreview) {
+    if (globalState.isStartedPreview) {
       onStopPreview().then(() => {
         setTimeout(function () {
           onStartPreview({ resolution: e.key as VideoResolution })();
@@ -125,7 +119,7 @@ const VideoPlayer = () => {
               icon={<PlayCircleOutlined />}
               size="large"
               onClick={onStartPreview({ resolution: state.currentResolution })}
-              disabled={state.isStartedPreview || globalState.isRecording}
+              disabled={globalState.isStartedPreview || globalState.isRecording}
             />
 
             <Button
@@ -134,11 +128,18 @@ const VideoPlayer = () => {
               icon={<PauseOutlined />}
               size="large"
               onClick={onStopPreview}
-              disabled={!state.isStartedPreview}
+              disabled={
+                !globalState.isStartedPreview || globalState.isRecording
+              }
             />
           </div>
           <div>
-            <Dropdown overlay={menu} trigger={["click"]} placement="topCenter">
+            <Dropdown
+              overlay={menu}
+              disabled={globalState.isRecording}
+              trigger={["click"]}
+              placement="topCenter"
+            >
               <Button type="primary" icon={<SettingOutlined />} size="large" />
             </Dropdown>
             <Button
