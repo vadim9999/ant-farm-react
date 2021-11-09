@@ -1,25 +1,52 @@
 import { CameraOutlined } from "@ant-design/icons";
-import { Button, Input, Select } from "antd";
-import React from "react";
+import { Button, Input, Modal, Select } from "antd";
+import React, { useState } from "react";
+import CreatePictureForm from "./CreatePictureForm/CreatePictureForm";
+import { FormValues } from "./CreatePictureForm/typesCreatePictureForm";
 
 const { Option } = Select;
 
 const CreatePicture = () => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const locales = {
+    createImage: "Створити зображення",
+  };
+
+  const onCloseModal = () => {
+    setIsModalVisible(false);
+  };
+
+  const onSubmitModal = (values: FormValues) => {
+    console.log("values", values);
+
+    setIsModalVisible(false);
+  };
+
+  const onOpenModal = () => {
+    setIsModalVisible(true);
+  };
+
   return (
     <div>
-      <Input placeholder="Ім'я відеофайлу" style={{ width: 400 }} />
-      <Select
-        defaultValue="854x480"
-        style={{ width: 120 }}
-        // onChange={handleChange}
+      <Button
+        type="primary"
+        icon={<CameraOutlined />}
+        onClick={onOpenModal}
+        size="large"
       >
-        <Option value="1280x720">1280x720</Option>
-        <Option value="854x480">854x480</Option>
-        <Option value="426x240">426x240</Option>
-      </Select>
-      <Button type="primary" icon={<CameraOutlined />} size="large">
-        Створити зображення
+        {locales.createImage}
       </Button>
+
+      <Modal
+        title={locales.createImage}
+        centered
+        visible={isModalVisible}
+        footer={null}
+        onCancel={onCloseModal}
+        destroyOnClose
+      >
+        <CreatePictureForm onSubmit={onSubmitModal} onCancel={onCloseModal} />
+      </Modal>
     </div>
   );
 };

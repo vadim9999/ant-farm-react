@@ -1,8 +1,8 @@
+import React, { useContext, useState } from "react";
 import { PauseOutlined, PlayCircleOutlined } from "@ant-design/icons";
 import { Button, Input, Modal, Select } from "antd";
 import { startRecording, stopRecording } from "api/api";
 import { GlobalContext } from "context/GlobalContextComponent";
-import React, { useContext, useState } from "react";
 import { useLocation } from "react-router";
 import { getUserId } from "utils/utils";
 import ButtonStopTimer from "./ButtonStopTimer/ButtonStopTimer";
