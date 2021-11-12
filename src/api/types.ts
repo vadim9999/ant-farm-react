@@ -18,3 +18,9 @@ export interface StartRecording {
 export interface StopRecording {
   userId: string;
 }
+
+export interface TakePicture {
+  resolution: VideoResolution;
+  filename: string;
+  userId: string; 
+}

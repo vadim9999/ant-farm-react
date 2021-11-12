@@ -5,6 +5,7 @@ import {
   StartRecording,
   StopPreview,
   StopRecording,
+  TakePicture,
 } from "./types";
 
 // const API_URL = document.location.protocol + "//" + document.location.host;
@@ -32,12 +33,19 @@ export const startRecording = ({
 }: StartRecording) =>
   axios.post(
     `${API_URL}/start_record?id=${userId}`,
-    JSON.stringify({ resolution, filename }),
+    JSON.stringify({ resolution, filename })
     // { timeout: 10000 }
   );
 
 export const stopRecording = ({ userId }: StopRecording) =>
   axios.get(`${API_URL}/stop_record?id=${userId}`);
+
+export const takePicture = ({ resolution, filename, userId }: TakePicture) =>
+  axios.post(
+    `${API_URL}/capture_image?id=${userId}`,
+    JSON.stringify({ resolution, filename })
+  );
+
 // axios({
 //   headers: {
 //     Accept: "*/*",
