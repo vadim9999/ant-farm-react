@@ -3,6 +3,7 @@ import React, { createContext, useMemo, useReducer } from "react";
 interface GlobalState {
   isRecording: boolean;
   isStartedPreview: boolean;
+  isStreaming: boolean;
 }
 
 interface ICreateContext {
@@ -11,7 +12,11 @@ interface ICreateContext {
 }
 
 export const GlobalContext = React.createContext<ICreateContext>({
-  globalState: { isRecording: false, isStartedPreview: false },
+  globalState: {
+    isRecording: false,
+    isStartedPreview: false,
+    isStreaming: false,
+  },
   dispatch: () => {},
 });
 
@@ -32,6 +37,7 @@ const GlobalContextComponent = ({ children }: IGlobalContextComponent) => {
     {
       isRecording: false,
       isStartedPreview: false,
+      isStreaming: false,
     }
   );
   const contextValue = useMemo(() => {

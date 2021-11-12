@@ -3,36 +3,62 @@ import {
   PlayCircleOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
-import { Button, Dropdown, Menu, Select } from "antd";
-import React from "react";
+import { Button, Dropdown, Menu, Modal, Select } from "antd";
+import { GlobalContext } from "context/GlobalContextComponent";
+import React, { useContext, useState } from "react";
+import { StreamingForm } from "./StreamingForm/StreamingForm";
 
 const { Option } = Select;
 
 const StreamingControls = () => {
+  const { globalState } = useContext(GlobalContext);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const locales = {
+    startStreaming: "Почати трансляцію",
+  };
+
+  const onCloseModal = () => {
+    setIsModalVisible(false);
+  };
+
+  const onSubmitModal = () => {
+    setIsModalVisible(false);
+  };
+
   return (
     <div>
-      <Button type="primary" icon={<PlayCircleOutlined />} size="large">
-        Почати трансляцію
-      </Button>
+      {globalState.isStreaming ? (
+        <Button
+          type="primary"
+          danger
+          icon={<PauseOutlined />}
+          size="large"
+          disabled
+        >
+          Зупинити трансляцію
+        </Button>
+      ) : (
+        <Button
+          type="primary"
+          icon={<PlayCircleOutlined />}
+          disabled={!globalState.isStartedPreview}
+          size="large"
+        >
+          {locales.startStreaming}
+        </Button>
+      )}
 
-      <Button
-        type="primary"
-        danger
-        icon={<PauseOutlined />}
-        size="large"
-        disabled
+      <Modal
+        title={locales.startStreaming}
+        centered
+        visible={isModalVisible}
+        footer={null}
+        onCancel={onCloseModal}
+        destroyOnClose
       >
-        Зупинити трансляцію
-      </Button>
-      <Select
-        defaultValue="480"
-        style={{ width: 120 }}
-        // onChange={handleChange}
-      >
-        <Option value="720">740</Option>
-        <Option value="480">480</Option>
-        <Option value="240">240</Option>
-      </Select>
+        <StreamingForm onSubmit={onSubmitModal} onCancel={onCloseModal} />
+      </Modal>
     </div>
   );
 };
