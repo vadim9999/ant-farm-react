@@ -12,7 +12,6 @@ import "./index.scss";
 
 import { API_URL, startPreview, stopPreview } from "api/api";
 import { useLocation, useParams, useRouteMatch } from "react-router";
-import { getUserId } from "utils/utils";
 import { VideoResolution } from "types";
 import { GlobalContext } from "context/GlobalContextComponent";
 import { State } from "./typesVideoPlayer";
@@ -33,9 +32,6 @@ const VideoPlayer = () => {
       currentResolution: VideoResolution.Q480,
     }
   );
-  console.log("location", getUserId(location.search));
-
-  const userId = getUserId(location.search);
 
   const onFullScreen = () => {
     var fullScreen = document.getElementById("fullScreen");
@@ -61,8 +57,8 @@ const VideoPlayer = () => {
   const onStartPreview =
     ({ resolution }: { resolution: VideoResolution }) =>
     () => {
-      startPreview({ userId, resolution }).then(() => {
-        const streamUrl = `${API_URL}/stream.mjpg?id=${userId}`;
+      startPreview({ userId: globalState.userId, resolution }).then(() => {
+        const streamUrl = `${API_URL}/stream.mjpg?id=${globalState.userId}`;
 
         setState({
           imageUrl: streamUrl,
@@ -72,7 +68,7 @@ const VideoPlayer = () => {
     };
 
   const onStopPreview = () => {
-    return stopPreview({ userId }).then(() => {
+    return stopPreview({ userId: globalState.userId }).then(() => {
       setState({
         imageUrl: "",
       });

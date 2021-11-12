@@ -4,6 +4,7 @@ interface GlobalState {
   isRecording: boolean;
   isStartedPreview: boolean;
   isStreaming: boolean;
+  userId: string;
 }
 
 interface ICreateContext {
@@ -16,6 +17,7 @@ export const GlobalContext = React.createContext<ICreateContext>({
     isRecording: false,
     isStartedPreview: false,
     isStreaming: false,
+    userId: "",
   },
   dispatch: () => {},
 });
@@ -38,6 +40,7 @@ const GlobalContextComponent = ({ children }: IGlobalContextComponent) => {
       isRecording: false,
       isStartedPreview: false,
       isStreaming: false,
+      userId: "",
     }
   );
   const contextValue = useMemo(() => {

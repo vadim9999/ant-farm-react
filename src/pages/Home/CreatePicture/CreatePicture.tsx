@@ -5,7 +5,6 @@ import React, { useContext, useState } from "react";
 import CreatePictureForm from "./CreatePictureForm/CreatePictureForm";
 import { FormValues } from "./CreatePictureForm/typesCreatePictureForm";
 import { takePicture } from "api/api";
-import { getUserId } from "utils/utils";
 import { useLocation } from "react-router";
 
 const { Option } = Select;
@@ -18,8 +17,6 @@ const CreatePicture = () => {
     createImage: "Створити зображення",
   };
 
-  const userId = getUserId(location.search);
-
   const onCloseModal = () => {
     setIsModalVisible(false);
   };
@@ -28,7 +25,7 @@ const CreatePicture = () => {
     takePicture({
       resolution: values.quality,
       filename: values.filename,
-      userId,
+      userId: globalState.userId,
     });
 
     setIsModalVisible(false);

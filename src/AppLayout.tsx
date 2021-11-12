@@ -1,11 +1,28 @@
-import React from "react";
-import { Layout, Menu } from "antd";
+import React, { useContext, useEffect, useState } from "react";
+import { Layout, Menu, Spin } from "antd";
 import Router from "Router";
 import "antd/dist/antd.css";
+import { Link, useLocation } from "react-router-dom";
+import { routes } from "routes";
+import { getUserId } from "api/api";
+import { GlobalContext } from "context/GlobalContextComponent";
 
 const { Header, Sider, Content } = Layout;
 
 const AppLayout = () => {
+  const location = useLocation();
+  const { globalState, dispatch } = useContext(GlobalContext);
+  console.log("location", location);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    getUserId().then((res) => {
+      console.log("data", res);
+      dispatch({ userId: String(res.data) });
+      setIsLoading(false);
+    });
+  }, []);
+
   return (
     <Layout>
       <Header
@@ -30,18 +47,25 @@ const AppLayout = () => {
         >
           <Menu
             mode="inline"
-            defaultSelectedKeys={["1"]}
-            defaultOpenKeys={["sub1"]}
+            selectedKeys={[location.pathname]}
+            // defaultSelectedKeys={["1"]}
+            // defaultOpenKeys={["sub1"]}
             // style={{ height: "100%", borderRight: 0 }}
           >
-            <Menu.Item key="1">Моніторинг</Menu.Item>
-            <Menu.Item key="2">Відеотрансляція</Menu.Item>
+            <Menu.Item key={routes.dashboard}>
+              <Link to={routes.dashboard}>Моніторинг</Link>
+            </Menu.Item>
+            <Menu.Item key={routes.videoStreaming}>
+              <Link to={routes.videoStreaming}>Відеотрансляція</Link>
+            </Menu.Item>
             <Menu.Item key="3">Медіафайли</Menu.Item>
-            <Menu.Item key="4">Налаштування</Menu.Item>
+            <Menu.Item key={routes.settings}>
+              <Link to={routes.settings}>Налаштування</Link>
+            </Menu.Item>
           </Menu>
         </Sider>
 
-        <Layout style={{ padding: "0 24px 24px", marginLeft: '200px' }}>
+        <Layout style={{ padding: "0 24px 24px", marginLeft: "200px" }}>
           <Content
             className="site-layout-background"
             style={{
@@ -50,7 +74,7 @@ const AppLayout = () => {
               // minHeight: 280,
             }}
           >
-            <Router />
+            {isLoading ? <Spin /> : <Router />}
           </Content>
         </Layout>
       </Layout>

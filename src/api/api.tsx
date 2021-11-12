@@ -8,8 +8,8 @@ import {
   TakePicture,
 } from "./types";
 
-// const API_URL = document.location.protocol + "//" + document.location.host;
-export const API_URL = "http://raspberrypi.local";
+// export const API_URL = `${document.location.protocol}"//"${document.location.hostname}:8080`;
+export const API_URL = "http://raspberrypi.local:8080";
 
 // {
 //   headers: {
@@ -45,6 +45,9 @@ export const takePicture = ({ resolution, filename, userId }: TakePicture) =>
     `${API_URL}/capture_image?id=${userId}`,
     JSON.stringify({ resolution, filename })
   );
+
+export const getUserId = () =>
+  axios.get(`${API_URL}/get_user_id`);
 
 // axios({
 //   headers: {

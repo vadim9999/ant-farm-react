@@ -4,7 +4,6 @@ import { Button, Input, Modal, Select } from "antd";
 import { startRecording, stopRecording } from "api/api";
 import { GlobalContext } from "context/GlobalContextComponent";
 import { useLocation } from "react-router";
-import { getUserId } from "utils/utils";
 import ButtonStopTimer from "./ButtonStopTimer/ButtonStopTimer";
 import { FormValues } from "./VideoRecordingForm/types";
 import VideoRecordingForm from "./VideoRecordingForm/VideoRecordingForm";
@@ -12,8 +11,6 @@ import VideoRecordingForm from "./VideoRecordingForm/VideoRecordingForm";
 const VideoRecording = () => {
   const { dispatch, globalState } = useContext(GlobalContext);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const location = useLocation();
-  const userId = getUserId(location.search);
 
   const onOpenModal = () => {
     console.log("click");
@@ -25,14 +22,12 @@ const VideoRecording = () => {
     console.log("data", values);
 
     startRecording({
-      userId,
+      userId: globalState.userId,
       resolution: values.quality,
       filename: values.filename,
     });
-    // (() => {
     dispatch({ isRecording: true });
     setIsModalVisible(false);
-    // });
   };
 
   const onCloseModal = () => {
@@ -40,7 +35,7 @@ const VideoRecording = () => {
   };
 
   const onStopRecording = () => {
-    stopRecording({ userId }).then(() => {
+    stopRecording({ userId: globalState.userId }).then(() => {
       dispatch({ isRecording: false });
     });
   };

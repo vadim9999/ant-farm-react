@@ -2,15 +2,17 @@ import AppLayout from "AppLayout";
 import GlobalContext from "context/GlobalContextComponent";
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
 // import "./index.css";
-import Router from "Router";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    <GlobalContext>
-      <AppLayout />
-    </GlobalContext>
+    <BrowserRouter>
+      <GlobalContext>
+        <AppLayout />
+      </GlobalContext>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );
