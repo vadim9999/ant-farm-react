@@ -6,12 +6,13 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/index.html" component={Home} />
-        <Route
+        <Route exact path="/" component={Home} />
+        {/* <Route
           exact
           path="/"
           component={() => <Redirect to="/index.html?id=5" />}
-        />
+        /> */}
+        {/* <Route */}
       </Switch>
     </BrowserRouter>
   );
