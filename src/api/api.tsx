@@ -23,8 +23,17 @@ export const API_URL = "http://raspberrypi.local:8080";
 //   },
 // }
 
-export const startPreview = ({ userId, resolution }: StartPreview) =>
-  axios.post(`${API_URL}/start?id=${userId}`, resolution);
+// TODO refactor this code
+class VideoService {
+  API: string | null = null;
+
+  constructor(api_url: string) {
+    this.API = api_url;
+  }
+
+  startPreview = ({ userId, resolution }: StartPreview) =>
+    axios.post(`${API_URL}/start?id=${userId}`, resolution);
+}
 
 export const stopPreview = ({ userId }: StopPreview) =>
   axios.get(`${API_URL}/stop?id=${userId}`);
@@ -79,3 +88,7 @@ export const saveStreamSettings = ({
 //   method: "POST",
 //   data: "854x480",
 // });
+
+const videoService = new VideoService(API_URL);
+
+export { videoService };

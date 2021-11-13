@@ -1,27 +1,41 @@
-import React, { useContext, useReducer, useState } from "react";
+import React, { useContext, useReducer } from "react";
 import { Button, Dropdown, Menu, MenuProps } from "antd";
 import {
-  BorderOutlined,
   FullscreenOutlined,
-  PauseCircleOutlined,
   PauseOutlined,
   PlayCircleOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
 import "./index.scss";
 
-import { API_URL, startPreview, stopPreview } from "api/api";
-import { useLocation, useParams, useRouteMatch } from "react-router";
+import { API_URL, stopPreview, videoService } from "api/api";
 import { VideoResolution } from "types";
 import { GlobalContext } from "context/GlobalContextComponent";
 import { State } from "./typesVideoPlayer";
 
+const onFullScreen = () => {
+  var fullScreen = document.getElementById("fullScreen");
+
+  // @ts-ignoreignore
+  fullScreen?.webkitRequestFullScreen();
+  // @ts-ignoreignore
+  if (document?.webkitFullscreenElement) {
+    // @ts-ignoreignore
+    document.webkitCancelFullScreen();
+    var image = document.getElementById("badge");
+    image?.setAttribute("width", "640");
+    image?.setAttribute("height", "480");
+  } else {
+    // @ts-ignoreignore
+    fullScreen?.webkitRequestFullScreen();
+    const image = document.getElementById("badge");
+    image?.setAttribute("width", "100%");
+    image?.setAttribute("height", "100%");
+  }
+};
+
 const VideoPlayer = () => {
   const { globalState, dispatch } = useContext(GlobalContext);
-  console.log("globalContext", globalState);
-
-  const location = useLocation();
-  const match = useLocation();
   const [state, setState] = useReducer(
     (prevState: State, nextState: Partial<State>): State => ({
       ...prevState,
@@ -33,38 +47,19 @@ const VideoPlayer = () => {
     }
   );
 
-  const onFullScreen = () => {
-    var fullScreen = document.getElementById("fullScreen");
-
-    // @ts-ignoreignore
-    fullScreen?.webkitRequestFullScreen();
-    // @ts-ignoreignore
-    if (document?.webkitFullscreenElement) {
-      // @ts-ignoreignore
-      document.webkitCancelFullScreen();
-      var image = document.getElementById("badge");
-      image?.setAttribute("width", "640");
-      image?.setAttribute("height", "480");
-    } else {
-      // @ts-ignoreignore
-      fullScreen?.webkitRequestFullScreen();
-      const image = document.getElementById("badge");
-      image?.setAttribute("width", "100%");
-      image?.setAttribute("height", "100%");
-    }
-  };
-
   const onStartPreview =
     ({ resolution }: { resolution: VideoResolution }) =>
     () => {
-      startPreview({ userId: globalState.userId, resolution }).then(() => {
-        const streamUrl = `${API_URL}/stream.mjpg?id=${globalState.userId}`;
+      videoService
+        .startPreview({ userId: globalState.userId, resolution })
+        .then(() => {
+          const streamUrl = `${API_URL}/stream.mjpg?id=${globalState.userId}`;
 
-        setState({
-          imageUrl: streamUrl,
+          setState({
+            imageUrl: streamUrl,
+          });
+          dispatch({ isStartedPreview: true });
         });
-        dispatch({ isStartedPreview: true });
-      });
     };
 
   const onStopPreview = () => {
@@ -84,7 +79,6 @@ const VideoPlayer = () => {
         }, 1000);
       });
     }
-    console.log("e", e.key);
     setState({ currentResolution: e.key as VideoResolution });
   };
 
