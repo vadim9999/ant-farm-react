@@ -1,12 +1,15 @@
 import axios from "axios";
 import { VideoResolution } from "types";
 import {
+  GetStreamSettings,
+  SaveStreamSettings,
   StartPreview,
   StartRecording,
   StopPreview,
   StopRecording,
   TakePicture,
 } from "./types";
+import { GetStreamSettingsResponse } from "./typesApiResponse";
 
 // export const API_URL = `${document.location.protocol}"//"${document.location.hostname}:8080`;
 export const API_URL = "http://raspberrypi.local:8080";
@@ -46,8 +49,24 @@ export const takePicture = ({ resolution, filename, userId }: TakePicture) =>
     JSON.stringify({ resolution, filename })
   );
 
-export const getUserId = () =>
-  axios.get(`${API_URL}/get_user_id`);
+export const getUserId = () => axios.get(`${API_URL}/get_user_id`);
+
+export const getStreamSettings = ({ userId }: GetStreamSettings) =>
+  axios
+    .get<GetStreamSettingsResponse>(`${API_URL}/stream_settings?id=${userId}`)
+    .then((res) => res.data);
+
+export const saveStreamSettings = ({
+  userId,
+  youtube,
+  key,
+}: SaveStreamSettings) =>
+  axios
+    .post(
+      `${API_URL}/set_stream_settings?id=${userId}`,
+      JSON.stringify({ youtube, key })
+    )
+    .then((res) => res.data);
 
 // axios({
 //   headers: {

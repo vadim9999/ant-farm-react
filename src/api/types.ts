@@ -22,5 +22,15 @@ export interface StopRecording {
 export interface TakePicture {
   resolution: VideoResolution;
   filename: string;
-  userId: string; 
+  userId: string;
+}
+
+export interface GetStreamSettings {
+  userId: string;
+}
+
+export interface SaveStreamSettings {
+  userId: string;
+  youtube: string;
+  key: string;
 }
