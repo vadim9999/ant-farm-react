@@ -25,8 +25,9 @@ const VideoRecording = () => {
       userId: globalState.userId,
       resolution: values.quality,
       filename: values.filename,
+    }).then(() => {
+      dispatch({ isRecording: true });
     });
-    dispatch({ isRecording: true });
     setIsModalVisible(false);
   };
 
@@ -52,7 +53,7 @@ const VideoRecording = () => {
           icon={<PlayCircleOutlined />}
           onClick={onOpenModal}
           size="large"
-          disabled={!globalState.isStartedPreview}
+          disabled={!globalState.isStartedPreview || globalState.isStreaming}
         >
           Почати запис
         </Button>

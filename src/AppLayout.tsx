@@ -17,6 +17,7 @@ const AppLayout = () => {
 
   useEffect(() => {
     getUserId().then((res) => {
+      // TODO add enpoint of getting is streaming
       console.log("data", res);
       dispatch({ userId: String(res.data) });
       setIsLoading(false);

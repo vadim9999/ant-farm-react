@@ -36,16 +36,6 @@ const onFullScreen = () => {
 
 const VideoPlayer = () => {
   const { globalState, dispatch } = useContext(GlobalContext);
-  const [state, setState] = useReducer(
-    (prevState: State, nextState: Partial<State>): State => ({
-      ...prevState,
-      ...nextState,
-    }),
-    {
-      imageUrl: "",
-      currentResolution: VideoResolution.Q480,
-    }
-  );
 
   const onStartPreview =
     ({ resolution }: { resolution: VideoResolution }) =>
@@ -55,19 +45,13 @@ const VideoPlayer = () => {
         .then(() => {
           const streamUrl = `${API_URL}/stream.mjpg?id=${globalState.userId}`;
 
-          setState({
-            imageUrl: streamUrl,
-          });
-          dispatch({ isStartedPreview: true });
+          dispatch({ isStartedPreview: true, imageUrl: streamUrl });
         });
     };
 
   const onStopPreview = () => {
     return stopPreview({ userId: globalState.userId }).then(() => {
-      setState({
-        imageUrl: "",
-      });
-      dispatch({ isStartedPreview: false });
+      dispatch({ isStartedPreview: false, imageUrl: "" });
     });
   };
 
@@ -79,11 +63,11 @@ const VideoPlayer = () => {
         }, 1000);
       });
     }
-    setState({ currentResolution: e.key as VideoResolution });
+    dispatch({ currentResolution: e.key as VideoResolution });
   };
 
   const menu = (
-    <Menu selectedKeys={[state.currentResolution]} onClick={onChangeQuality}>
+    <Menu selectedKeys={[globalState.currentResolution]} onClick={onChangeQuality}>
       <Menu.Item key={VideoResolution.Q720}>720 HD</Menu.Item>
       <Menu.Item key={VideoResolution.Q480}>480</Menu.Item>
       <Menu.Item key={VideoResolution.Q240}>240</Menu.Item>
@@ -93,10 +77,10 @@ const VideoPlayer = () => {
   return (
     <div className="videoPlayer">
       <div id="fullScreen">
-        {state.imageUrl && (
+        {globalState.imageUrl && (
           <img
             id="badge"
-            src={state.imageUrl}
+            src={globalState.imageUrl}
             width="640"
             height="480"
             alt="Video"
@@ -108,7 +92,7 @@ const VideoPlayer = () => {
               type="primary"
               icon={<PlayCircleOutlined />}
               size="large"
-              onClick={onStartPreview({ resolution: state.currentResolution })}
+              onClick={onStartPreview({ resolution: globalState.currentResolution })}
               disabled={globalState.isStartedPreview || globalState.isRecording}
             />
 

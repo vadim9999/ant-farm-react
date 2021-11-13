@@ -10,8 +10,15 @@ export const StreamingForm = ({ onCancel, onSubmit }: Props) => {
     quality: "Якість зображення",
   };
 
+  const initialValuesForm = { quality: VideoResolution.Q480 };
+
   return (
-    <Form form={form} name="streamingForm" onFinish={onSubmit}>
+    <Form
+      form={form}
+      name="streamingForm"
+      initialValues={initialValuesForm}
+      onFinish={onSubmit}
+    >
       <Form.Item name="quality" label={locales.quality}>
         <Select style={{ width: 120 }}>
           <Select.Option value={VideoResolution.Q720}>1280x720</Select.Option>

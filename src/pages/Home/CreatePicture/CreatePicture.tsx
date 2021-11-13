@@ -42,7 +42,7 @@ const CreatePicture = () => {
         icon={<CameraOutlined />}
         onClick={onOpenModal}
         size="large"
-        disabled={!globalState.isStartedPreview}
+        disabled={!globalState.isStartedPreview || globalState.isStreaming}
       >
         {locales.createImage}
       </Button>

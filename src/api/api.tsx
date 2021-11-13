@@ -5,9 +5,12 @@ import {
   SaveStreamSettings,
   StartPreview,
   StartRecording,
+  StartStream,
   StopPreview,
   StopRecording,
+  StopStream,
   TakePicture,
+  WaitStartPreview,
 } from "./types";
 import { GetStreamSettingsResponse } from "./typesApiResponse";
 
@@ -32,7 +35,16 @@ class VideoService {
   }
 
   startPreview = ({ userId, resolution }: StartPreview) =>
-    axios.post(`${API_URL}/start?id=${userId}`, resolution);
+    axios.post(`${this.API}/start?id=${userId}`, resolution);
+
+  waitStartPreview = ({ userId }: WaitStartPreview) =>
+    axios.get(`${this.API}/wait_start_preview?id=${userId}`);
+
+  startStream = ({ userId, resolution }: StartStream) =>
+    axios.post(`${this.API}/start_stream?id=${userId}`, resolution);
+
+  stopStream = ({ userId }: StopStream) =>
+    axios.get(`${this.API}/stop_stream?id=${userId}`);
 }
 
 export const stopPreview = ({ userId }: StopPreview) =>
@@ -73,6 +85,7 @@ export const saveStreamSettings = ({
   axios
     .post(
       `${API_URL}/set_stream_settings?id=${userId}`,
+      // TODO check it maybe it can be removed
       JSON.stringify({ youtube, key })
     )
     .then((res) => res.data);

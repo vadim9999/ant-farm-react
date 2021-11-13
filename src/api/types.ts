@@ -34,3 +34,16 @@ export interface SaveStreamSettings {
   youtube: string;
   key: string;
 }
+
+export interface WaitStartPreview {
+  userId: string;
+}
+
+export interface StartStream {
+  userId: string;
+  resolution: VideoResolution;
+}
+
+export interface StopStream {
+  userId: string;
+}

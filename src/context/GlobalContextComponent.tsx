@@ -1,10 +1,13 @@
 import React, { createContext, useMemo, useReducer } from "react";
+import { VideoResolution } from "types";
 
 interface GlobalState {
   isRecording: boolean;
   isStartedPreview: boolean;
   isStreaming: boolean;
   userId: string;
+  imageUrl: string;
+  currentResolution: VideoResolution;
 }
 
 interface ICreateContext {
@@ -18,6 +21,8 @@ export const GlobalContext = React.createContext<ICreateContext>({
     isStartedPreview: false,
     isStreaming: false,
     userId: "",
+    imageUrl: "",
+    currentResolution: VideoResolution.Q480,
   },
   dispatch: () => {},
 });
@@ -41,6 +46,8 @@ const GlobalContextComponent = ({ children }: IGlobalContextComponent) => {
       isStartedPreview: false,
       isStreaming: false,
       userId: "",
+      imageUrl: "",
+      currentResolution: VideoResolution.Q480,
     }
   );
   const contextValue = useMemo(() => {
