@@ -4,7 +4,7 @@ import Router from "Router";
 import "antd/dist/antd.css";
 import { Link, useLocation } from "react-router-dom";
 import { routes } from "routes";
-import { getUserId } from "api/api";
+import { getUserId, videoService } from "api/api";
 import { GlobalContext } from "context/GlobalContextComponent";
 
 const { Header, Sider, Content } = Layout;
@@ -16,12 +16,15 @@ const AppLayout = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    getUserId().then((res) => {
-      // TODO add enpoint of getting is streaming
-      console.log("data", res);
-      dispatch({ userId: String(res.data) });
-      setIsLoading(false);
-    });
+    Promise.all([getUserId(), videoService.isStreaming()]).then(
+      ([userIdData, isStreamingData]) => {
+        dispatch({
+          userId: String(userIdData.data),
+          isStreaming: isStreamingData.data === "True" ? true : false,
+        });
+        setIsLoading(false);
+      }
+    );
   }, []);
 
   return (
@@ -59,7 +62,9 @@ const AppLayout = () => {
             <Menu.Item key={routes.videoStreaming}>
               <Link to={routes.videoStreaming}>Відеотрансляція</Link>
             </Menu.Item>
-            <Menu.Item key="3">Медіафайли</Menu.Item>
+            <Menu.Item key={routes.mediaFiles}>
+              <Link to={routes.mediaFiles}>Медіафайли</Link>
+            </Menu.Item>
             <Menu.Item key={routes.settings}>
               <Link to={routes.settings}>Налаштування</Link>
             </Menu.Item>

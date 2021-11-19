@@ -45,6 +45,10 @@ class VideoService {
 
   stopStream = ({ userId }: StopStream) =>
     axios.get(`${this.API}/stop_stream?id=${userId}`);
+
+  isStreaming = () => axios.get(`${this.API}/is_streaming`);
+
+  getMediaFiles = () => axios.get(`${this.API}/media`);
 }
 
 export const stopPreview = ({ userId }: StopPreview) =>
