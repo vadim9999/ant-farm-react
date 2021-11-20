@@ -1,5 +1,5 @@
-import { Button, Col, Form, Input, Row, Select, Space } from "antd";
 import React from "react";
+import { Button, Col, Form, Input, Row, Select } from "antd";
 import { VideoResolution } from "types";
 import { Props } from "./types";
 

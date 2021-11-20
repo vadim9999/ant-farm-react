@@ -1,9 +1,8 @@
 import React, { useContext, useState } from "react";
-import { PauseOutlined, PlayCircleOutlined } from "@ant-design/icons";
-import { Button, Input, Modal, Select } from "antd";
+import { PlayCircleOutlined } from "@ant-design/icons";
+import { Button, Modal } from "antd";
 import { startRecording, stopRecording } from "api/api";
 import { GlobalContext } from "context/GlobalContextComponent";
-import { useLocation } from "react-router";
 import ButtonStopTimer from "./ButtonStopTimer/ButtonStopTimer";
 import { FormValues } from "./VideoRecordingForm/types";
 import VideoRecordingForm from "./VideoRecordingForm/VideoRecordingForm";

@@ -1,9 +1,7 @@
-import React from "react";
+import React from 'react'
 import { DeleteOutlined, DownloadOutlined } from "@ant-design/icons";
-import { Button, Popconfirm, Space, Table, TableProps } from "antd";
+import { Button, Popconfirm, Space, Table } from "antd";
 import { videoService } from "api/api";
-import { Link } from "react-router-dom";
-import { API_URL } from "api/api";
 import { dowloadFile } from "utils/downloadFile";
 import { ITableMediaFiles } from "./typesTableMediaFiles";
 

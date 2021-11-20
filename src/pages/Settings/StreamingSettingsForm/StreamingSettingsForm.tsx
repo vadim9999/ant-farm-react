@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Button, Form, Input } from "antd";
 import { Rule } from "rc-field-form/lib/interface";
 import { Props } from "./typesStreamingSettingsForm";
