@@ -20,6 +20,7 @@ import { getStreamSettings } from "api/api";
 const VideoStreaming = () => {
   const { globalState } = useContext(GlobalContext);
   const [hasStreamSettings, setHasStreamSettings] = useState(false);
+
   useEffect(() => {
     getStreamSettings({ userId: globalState.userId }).then((data) => {
       if (data.key && data.youtube) {
@@ -27,6 +28,7 @@ const VideoStreaming = () => {
       }
     });
   }, []);
+
   return (
     <Row>
       <Col>
