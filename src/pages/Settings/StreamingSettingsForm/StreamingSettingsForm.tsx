@@ -29,14 +29,14 @@ const StreamingSettingsForm = ({ onSubmit, initialValues }: Props) => {
         rules={[schema.youtubeLink]}
         label={locales.youtubeLink}
       >
-        <Input />
+        <Input allowClear />
       </Form.Item>
       <Form.Item
         name="youtubeKey"
         label={locales.youtubeKey}
         rules={[schema.youtubeKey]}
       >
-        <Input />
+        <Input allowClear />
       </Form.Item>
       <Form.Item>
         <Button htmlType="submit" type="primary">
