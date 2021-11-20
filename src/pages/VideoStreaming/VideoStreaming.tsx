@@ -32,7 +32,7 @@ const VideoStreaming = () => {
       <Col>
         <VideoPlayer />
       </Col>
-      <Col style={{ marginLeft: 15 }}>
+      <Col style={{ marginLeft: 15, marginTop: 15 }}>
         <Card>
           <Space direction="vertical">
             <Space>
