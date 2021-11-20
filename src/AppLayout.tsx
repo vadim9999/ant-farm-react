@@ -1,11 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Layout, Menu, Spin } from "antd";
+import { Layout, Menu, Space, Spin } from "antd";
 import Router from "Router";
 import "antd/dist/antd.css";
 import { Link, useLocation } from "react-router-dom";
 import { routes } from "routes";
 import { getUserId, videoService } from "api/api";
 import { GlobalContext } from "context/GlobalContextComponent";
+import {
+  DashboardOutlined,
+  FolderOpenOutlined,
+  SettingOutlined,
+  VideoCameraOutlined,
+} from "@ant-design/icons";
 
 const { Header, Sider, Content } = Layout;
 
@@ -57,16 +63,33 @@ const AppLayout = () => {
             // style={{ height: "100%", borderRight: 0 }}
           >
             <Menu.Item key={routes.dashboard}>
-              <Link to={routes.dashboard}>Моніторинг</Link>
+              <Link to={routes.dashboard}>
+                <Space>
+                  <DashboardOutlined /> Моніторинг
+                </Space>
+              </Link>
             </Menu.Item>
             <Menu.Item key={routes.videoStreaming}>
-              <Link to={routes.videoStreaming}>Відеотрансляція</Link>
+              <Link to={routes.videoStreaming}>
+                <Space>
+                  <VideoCameraOutlined /> Відеотрансляція
+                </Space>
+              </Link>
             </Menu.Item>
             <Menu.Item key={routes.mediaFiles}>
-              <Link to={routes.mediaFiles}>Медіафайли</Link>
+              <Link to={routes.mediaFiles}>
+                <Space>
+                  <FolderOpenOutlined /> Медіафайли
+                </Space>
+              </Link>
             </Menu.Item>
             <Menu.Item key={routes.settings}>
-              <Link to={routes.settings}>Налаштування</Link>
+              <Link to={routes.settings}>
+                <Space>
+                  <SettingOutlined />
+                  Налаштування
+                </Space>{" "}
+              </Link>
             </Menu.Item>
           </Menu>
         </Sider>
