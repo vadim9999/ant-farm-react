@@ -1,18 +1,32 @@
 import React, {
   createContext,
   useContext,
+  useEffect,
   useMemo,
   useReducer,
   useState,
 } from "react";
-import GlobalContext from "context/GlobalContextComponent";
+import { GlobalContext } from "context/GlobalContextComponent";
 import CreatePicture from "./CreatePicture/CreatePicture";
 import StreamingControls from "./StreamingControls/StreamingControls";
 import VideoPlayer from "./VideoPlayer/VideoPlayer";
 import VideoRecording from "./VideoRecording/VideoRecording";
-import { Card, Col, Row } from "antd";
+import { Card, Col, Popover, Row, Space } from "antd";
+import { InfoCircleOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
+import { routes } from "routes";
+import { getStreamSettings } from "api/api";
 
-const Home = () => {
+const VideoStreaming = () => {
+  const { globalState } = useContext(GlobalContext);
+  const [hasStreamSettings, setHasStreamSettings] = useState(false);
+  useEffect(() => {
+    getStreamSettings({ userId: globalState.userId }).then((data) => {
+      if (data.key && data.youtube) {
+        setHasStreamSettings(true);
+      }
+    });
+  }, []);
   return (
     <Row>
       <Col>
@@ -20,13 +34,30 @@ const Home = () => {
       </Col>
       <Col style={{ marginLeft: 15 }}>
         <Card>
-          <StreamingControls />
-          <VideoRecording />
-          <CreatePicture />
+          <Space direction="vertical">
+            <Space>
+              <StreamingControls isDisableStartStreaming={!hasStreamSettings} />
+              {!hasStreamSettings ? (
+                <Popover
+                  trigger="hover"
+                  content={
+                    <div>
+                      Налаштування для трансляції не встановлені перейдіть на
+                      сторінку <Link to={routes.settings}> Налаштування</Link>
+                    </div>
+                  }
+                >
+                  <InfoCircleOutlined />
+                </Popover>
+              ) : undefined}
+            </Space>
+            <VideoRecording />
+            <CreatePicture />
+          </Space>
         </Card>
       </Col>
     </Row>
   );
 };
 
-export default Home;
+export default VideoStreaming;

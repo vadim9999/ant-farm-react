@@ -12,7 +12,11 @@ import { FormValues } from "./StreamingForm/typesStreamingForm";
 
 const { Option } = Select;
 
-const StreamingControls = () => {
+const StreamingControls = ({
+  isDisableStartStreaming,
+}: {
+  isDisableStartStreaming: boolean;
+}) => {
   const { globalState, dispatch } = useContext(GlobalContext);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -63,7 +67,7 @@ const StreamingControls = () => {
   };
 
   return (
-    <div>
+    <>
       {globalState.isStreaming ? (
         <Button
           type="primary"
@@ -78,7 +82,7 @@ const StreamingControls = () => {
         <Button
           type="primary"
           icon={<PlayCircleOutlined />}
-          disabled={globalState.isStartedPreview}
+          disabled={globalState.isStartedPreview || isDisableStartStreaming}
           size="large"
           onClick={onOpenModal}
         >
@@ -96,7 +100,7 @@ const StreamingControls = () => {
       >
         <StreamingForm onSubmit={onSubmitModal} onCancel={onCloseModal} />
       </Modal>
-    </div>
+    </>
   );
 };
 
