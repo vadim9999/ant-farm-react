@@ -1,5 +1,5 @@
 import { CameraOutlined } from "@ant-design/icons";
-import { Button, Input, Modal, Select } from "antd";
+import { Button, Input, Modal, notification, Select } from "antd";
 import { GlobalContext } from "context/GlobalContextComponent";
 import React, { useContext, useState } from "react";
 import CreatePictureForm from "./CreatePictureForm/CreatePictureForm";
@@ -26,6 +26,10 @@ const CreatePicture = () => {
       resolution: values.quality,
       filename: values.filename,
       userId: globalState.userId,
+    }).then(() => {
+      notification.success({
+        message: `Зображення "${values.filename}" створено успішно`,
+      });
     });
 
     setIsModalVisible(false);
