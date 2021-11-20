@@ -10,15 +10,22 @@ import CreatePicture from "./CreatePicture/CreatePicture";
 import StreamingControls from "./StreamingControls/StreamingControls";
 import VideoPlayer from "./VideoPlayer/VideoPlayer";
 import VideoRecording from "./VideoRecording/VideoRecording";
+import { Card, Col, Row } from "antd";
 
 const Home = () => {
   return (
-    <div>
-      <VideoPlayer />
-      <StreamingControls />
-      <VideoRecording />
-      <CreatePicture />
-    </div>
+    <Row>
+      <Col>
+        <VideoPlayer />
+      </Col>
+      <Col style={{ marginLeft: 15 }}>
+        <Card>
+          <StreamingControls />
+          <VideoRecording />
+          <CreatePicture />
+        </Card>
+      </Col>
+    </Row>
   );
 };
 
