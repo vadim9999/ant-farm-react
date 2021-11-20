@@ -14,7 +14,7 @@ import {
   WaitStartPreview,
   DeleteMediaFile,
 } from "./types";
-import { GetStreamSettingsResponse } from "./typesApiResponse";
+import { GetStreamSettingsResponse, SensorsData } from "./typesApiResponse";
 
 // export const API_URL = `${document.location.protocol}"//"${document.location.hostname}:8080`;
 export const API_URL = "http://raspberrypi.local:8080";
@@ -63,6 +63,9 @@ class VideoService {
 
   deleteMediaFile = ({ fileName }: DeleteMediaFile) =>
     axios.get(`${this.API}/delete/${fileName}`).then((res) => res.data);
+
+  getSensorsData = () =>
+    axios.get<SensorsData>(`${this.API}/sensors`).then((res) => res.data);
 }
 
 // TODO Refactor this

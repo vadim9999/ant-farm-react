@@ -88,7 +88,7 @@ const AppLayout = () => {
                 <Space>
                   <SettingOutlined />
                   Налаштування
-                </Space>{" "}
+                </Space>
               </Link>
             </Menu.Item>
           </Menu>
