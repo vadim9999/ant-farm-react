@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { PlayCircleOutlined } from "@ant-design/icons";
-import { Button, Modal } from "antd";
+import { Button, Modal, notification } from "antd";
 import { startRecording, stopRecording } from "api/api";
 import { GlobalContext } from "context/GlobalContextComponent";
 import ButtonStopTimer from "./ButtonStopTimer/ButtonStopTimer";
@@ -26,6 +26,7 @@ const VideoRecording = () => {
       filename: values.filename,
     }).then(() => {
       dispatch({ isRecording: true });
+      notification.success({ message: `Запис почався` });
     });
     setIsModalVisible(false);
   };
@@ -37,6 +38,7 @@ const VideoRecording = () => {
   const onStopRecording = () => {
     stopRecording({ userId: globalState.userId }).then(() => {
       dispatch({ isRecording: false });
+      notification.success({ message: `Запис створено` });
     });
   };
 

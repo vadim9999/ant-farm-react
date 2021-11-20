@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Card, Spin } from "antd";
+import { Card, notification, Spin } from "antd";
 import { getStreamSettings, saveStreamSettings } from "api/api";
 import { GlobalContext } from "context/GlobalContextComponent";
 import StreamingSettingsForm from "./StreamingSettingsForm/StreamingSettingsForm";
@@ -25,7 +25,9 @@ const Settings = () => {
       youtube: formValues.youtubeLink,
       key: formValues.youtubeKey,
     }).then((data) => {
-      console.log("data", data);
+      notification.success({
+        message: "Налаштування для відеотрансляції в YouTube збережені",
+      });
     });
   };
 
