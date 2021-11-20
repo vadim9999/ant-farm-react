@@ -1,6 +1,7 @@
 import axios from "axios";
 import { VideoResolution } from "types";
 import {
+  DownloadMediaFile,
   GetStreamSettings,
   SaveStreamSettings,
   StartPreview,
@@ -11,6 +12,7 @@ import {
   StopStream,
   TakePicture,
   WaitStartPreview,
+  DeleteMediaFile,
 } from "./types";
 import { GetStreamSettingsResponse } from "./typesApiResponse";
 
@@ -28,7 +30,7 @@ export const API_URL = "http://raspberrypi.local:8080";
 
 // TODO refactor this code
 class VideoService {
-  API: string | null = null;
+  private API: string | null = null;
 
   constructor(api_url: string) {
     this.API = api_url;
@@ -43,14 +45,27 @@ class VideoService {
   startStream = ({ userId, resolution }: StartStream) =>
     axios.post(`${this.API}/start_stream?id=${userId}`, resolution);
 
+  // TODO add getting res.data here
   stopStream = ({ userId }: StopStream) =>
     axios.get(`${this.API}/stop_stream?id=${userId}`);
 
   isStreaming = () => axios.get(`${this.API}/is_streaming`);
 
-  getMediaFiles = () => axios.get(`${this.API}/media`);
+  getMediaFiles = () =>
+    axios.get<string>(`${this.API}/media`).then<string[]>((res) => {
+      return res.data.length ? JSON.parse(res.data.replaceAll("'", '"')) : [];
+    });
+
+  downloadMediaFile = ({ fileName }: DownloadMediaFile) =>
+    axios
+      .get<Blob>(`${this.API}/download/${fileName}`, { responseType: "blob" })
+      .then((res) => res.data);
+
+  deleteMediaFile = ({ fileName }: DeleteMediaFile) =>
+    axios.get(`${this.API}/delete/${fileName}`).then((res) => res.data);
 }
 
+// TODO Refactor this
 export const stopPreview = ({ userId }: StopPreview) =>
   axios.get(`${API_URL}/stop?id=${userId}`);
 

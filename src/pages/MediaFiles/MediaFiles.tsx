@@ -1,11 +1,22 @@
-import React, { useState } from "react";
+import { videoService } from "api/api";
+import React, { useEffect, useState } from "react";
+import TableMediaFiles from "./TableMediaFiles/TableMediaFiles";
 
 const MediaFiles = () => {
-  const [files, setFiles] = useState(null);
+  const [files, setFiles] = useState<string[]>([]);
 
-//   useEffect(() => {}, []);
+  const getFiles = () => {
+    videoService.getMediaFiles().then((data) => {
+      setFiles(data);
+      console.log("data", data);
+    });
+  };
 
-  return <div>Media Files</div>;
+  useEffect(() => {
+    getFiles();
+  }, []);
+
+  return <TableMediaFiles getFiles={getFiles} mediaFiles={files} />;
 };
 
 export default MediaFiles;

@@ -47,3 +47,11 @@ export interface StartStream {
 export interface StopStream {
   userId: string;
 }
+
+export interface DownloadMediaFile {
+  fileName: string;
+}
+
+export interface DeleteMediaFile {
+  fileName: string;
+}
