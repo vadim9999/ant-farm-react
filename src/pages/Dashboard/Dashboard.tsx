@@ -29,18 +29,18 @@ const strokeColor = {
 const TEMPERATURE_OFFSET = 30;
 
 const Dashboard = () => {
-  const [sensors, setSensors] = useState<SensorsData["sensors"] | null>(null);
+  const [sensors, setSensors] = useState<SensorsData | null>(null);
 
   useEffect(() => {
     videoService.getSensorsData().then((data) => {
       console.log("data", data);
-      setSensors(data.sensors);
+      setSensors(data);
     });
   }, []);
 
   console.log("sensors", sensors);
 
-  const sensorsValues = sensors ? sensors : sensorsDefualtValues;
+  const sensorsValues = sensors ? sensors.sensors : sensorsDefualtValues;
 
   return (
     <div>
@@ -82,6 +82,11 @@ const Dashboard = () => {
                 format={() => `${sensorsValues.outside.temp} C`}
               />
             </Space>
+          </Card>
+        </Col>
+        <Col>
+          <Card title="Рівень води">
+            <Progress percent={sensors?.waterLevel} steps={3} />
           </Card>
         </Col>
       </Row>
