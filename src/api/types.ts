@@ -60,3 +60,7 @@ export interface SetSettingsFeeder {
   interval: string;
   userId: string;
 }
+
+export interface FeedNow {
+  userId: string;
+}

@@ -16,6 +16,7 @@ import { InfoCircleOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { routes } from "routes";
 import { getStreamSettings } from "api/api";
+import FeedNow from "./FeedNow/FeedNow";
 
 const VideoStreaming = () => {
   const { globalState } = useContext(GlobalContext);
@@ -55,6 +56,7 @@ const VideoStreaming = () => {
             </Space>
             <VideoRecording />
             <CreatePicture />
+            <FeedNow />
           </Space>
         </Card>
       </Col>
