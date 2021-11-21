@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Switch, Route, Link, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Link, Routes } from "react-router-dom";
 import VideoStreaming from "pages/VideoStreaming/VideoStreaming";
 import Settings from "pages/Settings/Settings";
 import MediaFiles from "./pages/MediaFiles/MediaFiles";
@@ -8,14 +8,14 @@ import Dashboard from "pages/Dashboard/Dashboard";
 
 const Router = () => {
   return (
-    <Switch>
-      <Route exact path={routes.dashboard} component={Dashboard} />
-      <Route exact path={routes.videoStreaming} component={VideoStreaming} />
-      <Route exact path={routes.mediaFiles} component={MediaFiles} />
-      <Route exact path={routes.settings} component={Settings} />
+    <Routes>
+      <Route path={routes.dashboard} element={<Dashboard />} />
+      <Route path={routes.videoStreaming} element={<VideoStreaming />} />
+      <Route path={routes.mediaFiles} element={<MediaFiles />} />
+      <Route path={routes.settings} element={<Settings />} />
 
       {/* TODO add page not found */}
-    </Switch>
+    </Routes>
   );
 };
 
