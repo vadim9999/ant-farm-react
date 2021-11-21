@@ -55,3 +55,8 @@ export interface DownloadMediaFile {
 export interface DeleteMediaFile {
   fileName: string;
 }
+
+export interface SetSettingsFeeder {
+  interval: string;
+  userId: string;
+}

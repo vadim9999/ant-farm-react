@@ -1,20 +1,45 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Card, notification, Spin } from "antd";
-import { getStreamSettings, saveStreamSettings } from "api/api";
+import React, { useContext, useEffect, useReducer, useState } from "react";
+import { Card, Col, notification, Row, Spin } from "antd";
+import { getStreamSettings, saveStreamSettings, videoService } from "api/api";
 import { GlobalContext } from "context/GlobalContextComponent";
 import StreamingSettingsForm from "./StreamingSettingsForm/StreamingSettingsForm";
 import { StreamingSettingsFormValues } from "./StreamingSettingsForm/typesStreamingSettingsForm";
+import FeedSettingsForm from "./FeedSettingsForm/FeedSettingsForm";
+import { FeedSettingsFormValues } from "./FeedSettingsForm/typesFeedSettingsForm";
+
+interface State {
+  initialValuesStream: StreamingSettingsFormValues | null;
+  initialValuesFeeder: FeedSettingsFormValues | null;
+}
 
 const Settings = () => {
   const { globalState } = useContext(GlobalContext);
-  const [initialValues, setInitialValues] =
-    useState<StreamingSettingsFormValues>();
+  const [state, setState] = useReducer(
+    (prevState: State, nextState: Partial<State>): State => ({
+      ...prevState,
+      ...nextState,
+    }),
+    {
+      initialValuesStream: null,
+      initialValuesFeeder: null,
+    }
+  );
 
   useEffect(() => {
-    getStreamSettings({ userId: globalState.userId }).then((data) => {
-      console.log("data", data);
+    Promise.all([
+      getStreamSettings({ userId: globalState.userId }),
+      videoService.getSettingsFeeder(),
+    ]).then(([streamSettings, feederInterval]) => {
       // TODO change naming on backend side
-      setInitialValues({ youtubeKey: data.key, youtubeLink: data.youtube });
+      setState({
+        initialValuesStream: {
+          youtubeKey: streamSettings.key,
+          youtubeLink: streamSettings.youtube,
+        },
+        initialValuesFeeder: {
+          interval: feederInterval,
+        },
+      });
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -31,17 +56,50 @@ const Settings = () => {
     });
   };
 
+  const onSaveFeedSettings = (formValues: FeedSettingsFormValues) => {
+    videoService
+      .setSettingsFeeder({
+        interval: formValues.interval,
+        userId: globalState.userId,
+      })
+      .then(() => {
+        notification.success({
+          message: "Налаштування для годівниці збережені",
+        });
+      });
+  };
+
   return (
-    <Card title="Youtube settings" style={{ width: 500 }}>
-      {initialValues ? (
-        <StreamingSettingsForm
-          initialValues={initialValues}
-          onSubmit={onSaveStreamSettings}
-        />
-      ) : (
-        <Spin />
-      )}
-    </Card>
+    <>
+      <Row>
+        <Col style={{ width: 400 }}>
+          <Card title="Youtube settings">
+            {state.initialValuesStream ? (
+              <StreamingSettingsForm
+                initialValues={state.initialValuesStream}
+                onSubmit={onSaveStreamSettings}
+              />
+            ) : (
+              <Spin />
+            )}
+          </Card>
+        </Col>
+      </Row>
+      <Row style={{ marginTop: 15 }}>
+        <Col style={{ width: 400 }}>
+          <Card title="Налаштування годівниці">
+            {state.initialValuesFeeder ? (
+              <FeedSettingsForm
+                onSubmit={onSaveFeedSettings}
+                initialValues={state.initialValuesFeeder}
+              />
+            ) : (
+              <Spin />
+            )}
+          </Card>
+        </Col>
+      </Row>
+    </>
   );
 };
 

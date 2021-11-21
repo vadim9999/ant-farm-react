@@ -13,6 +13,7 @@ import {
   TakePicture,
   WaitStartPreview,
   DeleteMediaFile,
+  SetSettingsFeeder,
 } from "./types";
 import { GetStreamSettingsResponse, SensorsData } from "./typesApiResponse";
 
@@ -66,6 +67,14 @@ class VideoService {
 
   getSensorsData = () =>
     axios.get<SensorsData>(`${this.API}/sensors`).then((res) => res.data);
+
+  setSettingsFeeder = ({ interval, userId }: SetSettingsFeeder) =>
+    axios
+      .post(`${this.API}/set_settings_feeder?id=${userId}`, interval)
+      .then((res) => res.data);
+
+  getSettingsFeeder = () =>
+    axios.get(`${this.API}/get_settings_feeder`).then((res) => res.data);
 }
 
 // TODO Refactor this
