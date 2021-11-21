@@ -15,6 +15,8 @@ import {
   DeleteMediaFile,
   SetSettingsFeeder,
   FeedNow,
+  ShutdownRPI,
+  RebootRPI,
 } from "./types";
 import { GetStreamSettingsResponse, SensorsData } from "./typesApiResponse";
 
@@ -82,6 +84,12 @@ class VideoService {
 
   feedNow = ({ userId }: FeedNow) =>
     axios.get(`${this.API}/feed?id=${userId}`).then((res) => res.data);
+
+  shutDownRPI = ({ userId }: ShutdownRPI) =>
+    axios.get(`${this.API}/shutdown_pi?id=${userId}`).then((res) => res.data);
+
+  rebootRPI = ({ userId }: RebootRPI) =>
+    axios.get(`${this.API}/reboot_pi?id=${userId}`).then((res) => res.data);
 }
 
 // TODO Refactor this

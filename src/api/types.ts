@@ -64,3 +64,11 @@ export interface SetSettingsFeeder {
 export interface FeedNow {
   userId: string;
 }
+
+export interface ShutdownRPI {
+  userId: string;
+}
+
+export interface RebootRPI {
+  userId: string;
+}

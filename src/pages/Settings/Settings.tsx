@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useReducer, useState } from "react";
-import { Card, Col, notification, Row, Spin } from "antd";
+import { Button, Card, Col, notification, Row, Space, Spin } from "antd";
 import { getStreamSettings, saveStreamSettings, videoService } from "api/api";
 import { GlobalContext } from "context/GlobalContextComponent";
 import StreamingSettingsForm from "./StreamingSettingsForm/StreamingSettingsForm";
 import { StreamingSettingsFormValues } from "./StreamingSettingsForm/typesStreamingSettingsForm";
 import FeedSettingsForm from "./FeedSettingsForm/FeedSettingsForm";
 import { FeedSettingsFormValues } from "./FeedSettingsForm/typesFeedSettingsForm";
+import { PoweroffOutlined, RetweetOutlined } from "@ant-design/icons";
 
 interface State {
   initialValuesStream: StreamingSettingsFormValues | null;
@@ -82,6 +83,23 @@ const Settings = () => {
       });
   };
 
+  const onShutDownRPI = () => {
+    videoService.shutDownRPI({ userId: globalState.userId }).then(() => {
+      notification.success({
+        message: "Вимикання...",
+      });
+    });
+  };
+
+  const onRebootRPI = () => {
+    videoService.rebootRPI({ userId: globalState.userId }).then(() => {
+      notification.success({
+        message: "Перезавантаження...",
+      });
+    });
+  };
+
+  //TODO split on two components and use it here
   return (
     <>
       <Row>
@@ -109,6 +127,28 @@ const Settings = () => {
             ) : (
               <Spin />
             )}
+          </Card>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <Card title="Керування фермою">
+            <Space direction="vertical">
+              <Button
+                type="primary"
+                icon={<PoweroffOutlined />}
+                onClick={onShutDownRPI}
+              >
+                Вимкнути
+              </Button>
+              <Button
+                type="primary"
+                icon={<RetweetOutlined />}
+                onClick={onRebootRPI}
+              >
+                Перезавантажити
+              </Button>
+            </Space>
           </Card>
         </Col>
       </Row>
