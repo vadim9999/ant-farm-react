@@ -74,7 +74,7 @@ class VideoService {
       .then((res) => res.data);
 
   getSettingsFeeder = () =>
-    axios.get(`${this.API}/get_settings_feeder`).then((res) => res.data);
+    axios.get<string>(`${this.API}/get_settings_feeder`).then((res) => res.data);
 }
 
 // TODO Refactor this

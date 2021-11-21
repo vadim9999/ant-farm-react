@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Form, Input } from "antd";
 import { Rule } from "rc-field-form/lib/interface";
 import { Props } from "./typesStreamingSettingsForm";
 
 const StreamingSettingsForm = ({ onSubmit, initialValues }: Props) => {
   const [form] = Form.useForm();
+
+  useEffect(() => {
+    form.resetFields();
+  }, [initialValues]);
 
   const locales = {
     youtubeLink: "Посилання youtube",

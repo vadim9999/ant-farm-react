@@ -25,22 +25,31 @@ const Settings = () => {
     }
   );
 
-  useEffect(() => {
-    Promise.all([
-      getStreamSettings({ userId: globalState.userId }),
-      videoService.getSettingsFeeder(),
-    ]).then(([streamSettings, feederInterval]) => {
-      // TODO change naming on backend side
+  const onGetStreamSettings = () => {
+    // TODO change naming on backend side
+    getStreamSettings({ userId: globalState.userId }).then((streamSettings) => {
       setState({
         initialValuesStream: {
           youtubeKey: streamSettings.key,
           youtubeLink: streamSettings.youtube,
         },
+      });
+    });
+  };
+
+  const onGetFeederSettings = () => {
+    videoService.getSettingsFeeder().then((feederInterval) => {
+      setState({
         initialValuesFeeder: {
           interval: feederInterval,
         },
       });
     });
+  };
+
+  useEffect(() => {
+    onGetStreamSettings();
+    onGetFeederSettings();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -50,6 +59,8 @@ const Settings = () => {
       youtube: formValues.youtubeLink,
       key: formValues.youtubeKey,
     }).then((data) => {
+      console.log("data", data);
+      onGetStreamSettings();
       notification.success({
         message: "Налаштування для відеотрансляції в YouTube збережені",
       });
@@ -62,7 +73,9 @@ const Settings = () => {
         interval: formValues.interval,
         userId: globalState.userId,
       })
-      .then(() => {
+      .then((data) => {
+        console.log("data1", data);
+        onGetFeederSettings();
         notification.success({
           message: "Налаштування для годівниці збережені",
         });

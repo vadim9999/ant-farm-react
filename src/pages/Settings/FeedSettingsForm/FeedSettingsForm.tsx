@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Form, Select } from "antd";
 import { Props } from "./typesFeedSettingsForm";
 
@@ -9,6 +9,10 @@ const FeedSettingsForm = ({ onSubmit, initialValues }: Props) => {
     interval: "Інтервал (днях)",
     submit: "Зберегти",
   };
+
+  useEffect(() => {
+    form.resetFields();
+  }, [initialValues]);
 
   return (
     <Form
