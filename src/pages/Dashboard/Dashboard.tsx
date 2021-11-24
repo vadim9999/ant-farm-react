@@ -32,10 +32,17 @@ const Dashboard = () => {
   const [sensors, setSensors] = useState<SensorsData | null>(null);
 
   useEffect(() => {
-    videoService.getSensorsData().then((data) => {
-      console.log("data", data);
-      setSensors(data);
-    });
+    const interval = setInterval(() => {
+      videoService.getSensorsData().then((data) => {
+        console.log("data", data);
+        setSensors(data);
+      });
+    }, 5000);
+
+    return () => {
+      clearInterval(interval);
+      console.log("cleared");
+    };
   }, []);
 
   console.log("sensors", sensors);
