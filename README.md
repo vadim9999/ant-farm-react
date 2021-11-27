@@ -1,3 +1,7 @@
+API: https://github.com/vadim9999/ant-farm-python
+
+Static NodeJS server on expressjs: https://github.com/vadim9999/ant-farm-nodejs
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
