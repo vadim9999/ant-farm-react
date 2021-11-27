@@ -93,7 +93,7 @@ const Dashboard = () => {
         </Col>
         <Col>
           <Card title="Рівень води">
-            <Progress percent={sensors?.waterLevel} steps={3} />
+            <Progress percent={sensors?.waterLevel} steps={5} />
           </Card>
         </Col>
       </Row>
