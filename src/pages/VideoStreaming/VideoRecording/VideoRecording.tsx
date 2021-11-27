@@ -1,11 +1,11 @@
 import React, { useContext, useState } from "react";
 import { PlayCircleOutlined } from "@ant-design/icons";
 import { Button, Modal, notification } from "antd";
-import { startRecording, stopRecording } from "api/api";
 import { GlobalContext } from "context/GlobalContextComponent";
 import ButtonStopTimer from "./ButtonStopTimer/ButtonStopTimer";
 import { FormValues } from "./VideoRecordingForm/types";
 import VideoRecordingForm from "./VideoRecordingForm/VideoRecordingForm";
+import videoService from "api/video-service/video.service";
 
 const VideoRecording = () => {
   const { dispatch, globalState } = useContext(GlobalContext);
@@ -20,14 +20,16 @@ const VideoRecording = () => {
   const onSubmitModal = (values: FormValues) => {
     console.log("data", values);
 
-    startRecording({
-      userId: globalState.userId,
-      resolution: values.quality,
-      filename: values.filename,
-    }).then(() => {
-      dispatch({ isRecording: true });
-      notification.success({ message: `Запис почався` });
-    });
+    videoService
+      .startRecording({
+        userId: globalState.userId,
+        resolution: values.quality,
+        filename: values.filename,
+      })
+      .then(() => {
+        dispatch({ isRecording: true });
+        notification.success({ message: `Запис почався` });
+      });
     setIsModalVisible(false);
   };
 
@@ -36,7 +38,7 @@ const VideoRecording = () => {
   };
 
   const onStopRecording = () => {
-    stopRecording({ userId: globalState.userId }).then(() => {
+    videoService.stopRecording({ userId: globalState.userId }).then(() => {
       dispatch({ isRecording: false });
       notification.success({ message: `Запис створено` });
     });

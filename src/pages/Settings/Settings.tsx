@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useReducer, useState } from "react";
 import { Button, Card, Col, notification, Row, Space, Spin } from "antd";
-import { getStreamSettings, saveStreamSettings, videoService } from "api/api";
+import settingsService from "api/settings-service/settings.service";
 import { GlobalContext } from "context/GlobalContextComponent";
 import StreamingSettingsForm from "./StreamingSettingsForm/StreamingSettingsForm";
 import { StreamingSettingsFormValues } from "./StreamingSettingsForm/typesStreamingSettingsForm";
 import FeedSettingsForm from "./FeedSettingsForm/FeedSettingsForm";
 import { FeedSettingsFormValues } from "./FeedSettingsForm/typesFeedSettingsForm";
 import { PoweroffOutlined, RetweetOutlined } from "@ant-design/icons";
+import videoService from "api/video-service/video.service";
 
 interface State {
   initialValuesStream: StreamingSettingsFormValues | null;
@@ -28,18 +29,20 @@ const Settings = () => {
 
   const onGetStreamSettings = () => {
     // TODO change naming on backend side
-    getStreamSettings({ userId: globalState.userId }).then((streamSettings) => {
-      setState({
-        initialValuesStream: {
-          youtubeKey: streamSettings.key,
-          youtubeLink: streamSettings.youtube,
-        },
+    settingsService
+      .getStreamSettings({ userId: globalState.userId })
+      .then((streamSettings) => {
+        setState({
+          initialValuesStream: {
+            youtubeKey: streamSettings.key,
+            youtubeLink: streamSettings.youtube,
+          },
+        });
       });
-    });
   };
 
   const onGetFeederSettings = () => {
-    videoService.getSettingsFeeder().then((feederInterval) => {
+    settingsService.getSettingsFeeder().then((feederInterval) => {
       setState({
         initialValuesFeeder: {
           interval: feederInterval,
@@ -55,21 +58,23 @@ const Settings = () => {
   }, []);
 
   const onSaveStreamSettings = (formValues: StreamingSettingsFormValues) => {
-    saveStreamSettings({
-      userId: globalState.userId,
-      youtube: formValues.youtubeLink,
-      key: formValues.youtubeKey,
-    }).then((data) => {
-      console.log("data", data);
-      onGetStreamSettings();
-      notification.success({
-        message: "Налаштування для відеотрансляції в YouTube збережені",
+    settingsService
+      .saveStreamSettings({
+        userId: globalState.userId,
+        youtube: formValues.youtubeLink,
+        key: formValues.youtubeKey,
+      })
+      .then((data) => {
+        console.log("data", data);
+        onGetStreamSettings();
+        notification.success({
+          message: "Налаштування для відеотрансляції в YouTube збережені",
+        });
       });
-    });
   };
 
   const onSaveFeedSettings = (formValues: FeedSettingsFormValues) => {
-    videoService
+    settingsService
       .setSettingsFeeder({
         interval: formValues.interval,
         userId: globalState.userId,
@@ -84,7 +89,7 @@ const Settings = () => {
   };
 
   const onShutDownRPI = () => {
-    videoService.shutDownRPI({ userId: globalState.userId }).then(() => {
+    settingsService.shutDownRPI({ userId: globalState.userId }).then(() => {
       notification.success({
         message: "Вимикання...",
       });
@@ -92,7 +97,7 @@ const Settings = () => {
   };
 
   const onRebootRPI = () => {
-    videoService.rebootRPI({ userId: globalState.userId }).then(() => {
+    settingsService.rebootRPI({ userId: globalState.userId }).then(() => {
       notification.success({
         message: "Перезавантаження...",
       });

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Card, Col, Progress, Row, Space } from "antd";
-import { videoService } from "api/api";
-import { SensorDHTName, SensorsData } from "api/typesApiResponse";
+import { SensorsData } from "api/settings-service/typesResponse";
+import sensorsService from "api/sensors-service/sensors.service";
 
 // TODO move to separate file styles.ts
 
@@ -33,7 +33,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      videoService.getSensorsData().then((data) => {
+      sensorsService.getSensorsData().then((data) => {
         console.log("data", data);
         setSensors(data);
       });

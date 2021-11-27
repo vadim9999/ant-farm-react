@@ -8,10 +8,11 @@ import {
 } from "@ant-design/icons";
 import "./index.scss";
 
-import { API_URL, stopPreview, videoService } from "api/api";
+import { API_URL } from "api/api";
 import { VideoResolution } from "types";
 import { GlobalContext } from "context/GlobalContextComponent";
 import { State } from "./typesVideoPlayer";
+import videoService from "api/video-service/video.service";
 
 const onFullScreen = () => {
   var fullScreen = document.getElementById("fullScreen");
@@ -50,7 +51,7 @@ const VideoPlayer = () => {
     };
 
   const onStopPreview = () => {
-    return stopPreview({ userId: globalState.userId }).then(() => {
+    return videoService.stopPreview({ userId: globalState.userId }).then(() => {
       dispatch({ isStartedPreview: false, imageUrl: "" });
     });
   };
@@ -67,7 +68,10 @@ const VideoPlayer = () => {
   };
 
   const menu = (
-    <Menu selectedKeys={[globalState.currentResolution]} onClick={onChangeQuality}>
+    <Menu
+      selectedKeys={[globalState.currentResolution]}
+      onClick={onChangeQuality}
+    >
       <Menu.Item key={VideoResolution.Q720}>720 HD</Menu.Item>
       <Menu.Item key={VideoResolution.Q480}>480</Menu.Item>
       <Menu.Item key={VideoResolution.Q240}>240</Menu.Item>
@@ -92,7 +96,9 @@ const VideoPlayer = () => {
               type="primary"
               icon={<PlayCircleOutlined />}
               size="large"
-              onClick={onStartPreview({ resolution: globalState.currentResolution })}
+              onClick={onStartPreview({
+                resolution: globalState.currentResolution,
+              })}
               disabled={globalState.isStartedPreview || globalState.isRecording}
             />
 

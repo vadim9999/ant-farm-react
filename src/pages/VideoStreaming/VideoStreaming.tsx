@@ -15,19 +15,21 @@ import { Card, Col, Popover, Row, Space } from "antd";
 import { InfoCircleOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { routes } from "routes";
-import { getStreamSettings } from "api/api";
 import FeedNow from "./FeedNow/FeedNow";
+import settingsService from "api/settings-service/settings.service";
 
 const VideoStreaming = () => {
   const { globalState } = useContext(GlobalContext);
   const [hasStreamSettings, setHasStreamSettings] = useState(false);
 
   useEffect(() => {
-    getStreamSettings({ userId: globalState.userId }).then((data) => {
-      if (data.key && data.youtube) {
-        setHasStreamSettings(true);
-      }
-    });
+    settingsService
+      .getStreamSettings({ userId: globalState.userId })
+      .then((data) => {
+        if (data.key && data.youtube) {
+          setHasStreamSettings(true);
+        }
+      });
   }, []);
 
   return (

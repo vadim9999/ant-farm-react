@@ -4,8 +4,8 @@ import { GlobalContext } from "context/GlobalContextComponent";
 import React, { useContext, useState } from "react";
 import CreatePictureForm from "./CreatePictureForm/CreatePictureForm";
 import { FormValues } from "./CreatePictureForm/typesCreatePictureForm";
-import { takePicture } from "api/api";
 import { useLocation } from "react-router";
+import videoService from "api/video-service/video.service";
 
 const { Option } = Select;
 
@@ -22,15 +22,17 @@ const CreatePicture = () => {
   };
 
   const onSubmitModal = (values: FormValues) => {
-    takePicture({
-      resolution: values.quality,
-      filename: values.filename,
-      userId: globalState.userId,
-    }).then(() => {
-      notification.success({
-        message: `Зображення "${values.filename}" створено успішно`,
+    videoService
+      .takePicture({
+        resolution: values.quality,
+        filename: values.filename,
+        userId: globalState.userId,
+      })
+      .then(() => {
+        notification.success({
+          message: `Зображення "${values.filename}" створено успішно`,
+        });
       });
-    });
 
     setIsModalVisible(false);
   };

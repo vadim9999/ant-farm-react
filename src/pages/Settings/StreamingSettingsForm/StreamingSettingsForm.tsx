@@ -3,23 +3,23 @@ import { Button, Form, Input } from "antd";
 import { Rule } from "rc-field-form/lib/interface";
 import { Props } from "./typesStreamingSettingsForm";
 
+const schema: Record<string, Rule> = {
+  youtubeLink: { required: true, message: "Введіть посилання" },
+  youtubeKey: { required: true, message: "Введіть ключ youtube" },
+};
+
+const locales = {
+  youtubeLink: "Посилання youtube",
+  youtubeKey: "Ключ youtube",
+  submit: "Зберегти",
+};
+
 const StreamingSettingsForm = ({ onSubmit, initialValues }: Props) => {
   const [form] = Form.useForm();
 
   useEffect(() => {
     form.resetFields();
   }, [initialValues]);
-
-  const locales = {
-    youtubeLink: "Посилання youtube",
-    youtubeKey: "Ключ youtube",
-    submit: "Зберегти",
-  };
-
-  const schema: Record<string, Rule> = {
-    youtubeLink: { required: true, message: "Введіть посилання" },
-    youtubeKey: { required: true, message: "Введіть ключ youtube" },
-  };
 
   return (
     <Form

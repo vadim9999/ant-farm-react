@@ -1,5 +1,5 @@
-import { videoService } from "api/api";
 import React, { useEffect, useState } from "react";
+import videoService from "api/video-service/video.service";
 import TableMediaFiles from "./TableMediaFiles/TableMediaFiles";
 
 const MediaFiles = () => {

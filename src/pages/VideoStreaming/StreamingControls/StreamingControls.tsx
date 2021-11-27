@@ -4,7 +4,8 @@ import {
   SettingOutlined,
 } from "@ant-design/icons";
 import { Button, Dropdown, Menu, Modal, Select } from "antd";
-import { API_URL, videoService } from "api/api";
+import { API_URL } from "api/api";
+import videoService from "api/video-service/video.service";
 import { GlobalContext } from "context/GlobalContextComponent";
 import React, { useContext, useState } from "react";
 import { StreamingForm } from "./StreamingForm/StreamingForm";

@@ -1,9 +1,9 @@
 import React from 'react'
 import { DeleteOutlined, DownloadOutlined } from "@ant-design/icons";
 import { Button, Popconfirm, Space, Table } from "antd";
-import { videoService } from "api/api";
 import { dowloadFile } from "utils/downloadFile";
 import { ITableMediaFiles } from "./typesTableMediaFiles";
+import videoService from 'api/video-service/video.service';
 
 const TableMediaFiles = ({ mediaFiles, getFiles }: ITableMediaFiles) => {
   const dataSource = mediaFiles.map((fileName, index) => ({

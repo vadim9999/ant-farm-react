@@ -3,7 +3,8 @@ import { Layout, Menu, Space, Spin, Typography } from "antd";
 import Router from "Router";
 import { Link, useLocation } from "react-router-dom";
 import { routes } from "routes";
-import { getUserId, videoService } from "api/api";
+import { getUserId } from "api/api";
+import videoService from "api/video-service/video.service";
 import { GlobalContext } from "context/GlobalContextComponent";
 import {
   DashboardOutlined,
