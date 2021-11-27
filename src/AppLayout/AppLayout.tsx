@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Layout, Menu, Space, Spin, Typography } from "antd";
+import { Layout, Menu, notification, Space, Spin, Typography } from "antd";
 import Router from "Router";
 import { Link, useLocation } from "react-router-dom";
 import { routes } from "routes";
 import { getUserId } from "api/api";
 import videoService from "api/video-service/video.service";
-import { GlobalContext } from "context/GlobalContextComponent";
+import { GlobalContext, Locale } from "context/GlobalContextComponent";
 import {
   DashboardOutlined,
   FolderOpenOutlined,
@@ -14,8 +14,15 @@ import {
 } from "@ant-design/icons";
 
 import logo from "resources/logo.png";
-
+import "./styles.scss";
+import LocaleButton from "./LocaleButton/LocaleButton";
+import { useTranslation } from "react-i18next";
 const { Header, Sider, Content } = Layout;
+
+const locales = {
+  [Locale.En]: "Ant Farm",
+  [Locale.Uk]: "Мурашина ферма",
+};
 
 const AppLayout = () => {
   const location = useLocation();
@@ -24,16 +31,23 @@ const AppLayout = () => {
   const [isLoading, setIsLoading] = useState(true);
   console.log("logog", logo);
 
+  const { t } = useTranslation();
+
   useEffect(() => {
-    Promise.all([getUserId(), videoService.isStreaming()]).then(
-      ([userIdData, isStreamingData]) => {
+    Promise.all([getUserId(), videoService.isStreaming()])
+      .then(([userIdData, isStreamingData]) => {
         dispatch({
           userId: String(userIdData.data),
           isStreaming: isStreamingData.data === "True" ? true : false,
         });
-        setIsLoading(false);
-      }
-    );
+
+        // setIsLoading(false);
+      })
+      .catch(() => {
+        notification.error({
+          message: "Помилка в отриманні ідентифікатора користувача",
+        });
+      });
   }, []);
 
   return (
@@ -43,10 +57,17 @@ const AppLayout = () => {
         // style={{ position: "fixed", zIndex: 1, width: "100%" }}
       >
         {/* <div className="logo" /> */}
-        <img height="36" width="36" src={logo} alt="logo" />
-        <Typography.Text strong style={{ color: "gray", marginLeft: 15 }}>
-          Мурашина ферма
-        </Typography.Text>
+        {/* <div style={{ display: "flex", justifyContent: "space-between" }}> */}
+        <div className="logoWithText">
+          <img className="logo" src={logo} alt="logo" />
+          <Typography.Text strong className="text">
+            {t("appLayout.logoText")}
+          </Typography.Text>
+        </div>
+        <div className="locale">
+          <LocaleButton />
+        </div>
+        {/* </div> */}
       </Header>
       <Layout className="site-layout">
         <Sider
@@ -109,7 +130,7 @@ const AppLayout = () => {
               // minHeight: 280,
             }}
           >
-            {isLoading ? <Spin /> : <Router />}
+            <Router />
           </Content>
         </Layout>
       </Layout>

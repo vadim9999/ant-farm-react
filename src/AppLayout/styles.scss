@@ -1,0 +1,15 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+
+  .logoWithText {
+    .logo {
+      height: 36;
+      width: 36;
+    }
+    .text {
+      color: gray;
+      margin-left: 15px;
+    }
+  }
+}

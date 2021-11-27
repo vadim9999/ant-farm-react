@@ -1,6 +1,11 @@
 import React, { createContext, useMemo, useReducer } from "react";
 import { VideoResolution } from "types";
 
+export enum Locale {
+  En = "en_GB",
+  Uk = "uk_UA",
+}
+
 interface GlobalState {
   isRecording: boolean;
   isStartedPreview: boolean;

@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Card, Col, Progress, Row, Space } from "antd";
+import React, { useContext, useEffect, useState } from "react";
+import { Card, Col, notification, Progress, Row, Space } from "antd";
 import { SensorsData } from "api/settings-service/typesResponse";
 import sensorsService from "api/sensors-service/sensors.service";
+import { GlobalContext } from "context/GlobalContextComponent";
 
 // TODO move to separate file styles.ts
 
@@ -29,15 +30,25 @@ const strokeColor = {
 const TEMPERATURE_OFFSET = 30;
 
 const Dashboard = () => {
+  const { globalState } = useContext(GlobalContext);
   const [sensors, setSensors] = useState<SensorsData | null>(null);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      sensorsService.getSensorsData().then((data) => {
+    const getSensorsData = () => {
+      return sensorsService.getSensorsData().then((data) => {
         console.log("data", data);
         setSensors(data);
       });
+    };
+
+    const interval = setInterval(() => {
+      getSensorsData().catch(() => {
+        notification.error({ message: "Помилка в отриманні даних" });
+        clearInterval(interval);
+      });
     }, 5000);
+
+    getSensorsData();
 
     return () => {
       clearInterval(interval);
