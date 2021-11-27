@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Layout, Menu, Space, Spin } from "antd";
+import { Layout, Menu, Space, Spin, Typography } from "antd";
 import Router from "Router";
-import "antd/dist/antd.css";
 import { Link, useLocation } from "react-router-dom";
 import { routes } from "routes";
 import { getUserId, videoService } from "api/api";
@@ -13,6 +12,8 @@ import {
   VideoCameraOutlined,
 } from "@ant-design/icons";
 
+import logo from "resources/logo.png";
+
 const { Header, Sider, Content } = Layout;
 
 const AppLayout = () => {
@@ -20,6 +21,7 @@ const AppLayout = () => {
   const { globalState, dispatch } = useContext(GlobalContext);
   console.log("location", location);
   const [isLoading, setIsLoading] = useState(true);
+  console.log("logog", logo);
 
   useEffect(() => {
     Promise.all([getUserId(), videoService.isStreaming()]).then(
@@ -39,8 +41,11 @@ const AppLayout = () => {
         className="header"
         // style={{ position: "fixed", zIndex: 1, width: "100%" }}
       >
-        <div className="logo" />
-        Header
+        {/* <div className="logo" /> */}
+        <img height="36" width="36" src={logo} alt="logo" />
+        <Typography.Text strong style={{ color: "gray", marginLeft: 15 }}>
+          Мурашина ферма
+        </Typography.Text>
       </Header>
       <Layout className="site-layout">
         <Sider
