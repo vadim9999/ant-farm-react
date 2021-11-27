@@ -45,8 +45,6 @@ const Dashboard = () => {
     };
   }, []);
 
-  console.log("sensors", sensors);
-
   const sensorsValues = sensors ? sensors.sensors : sensorsDefualtValues;
 
   return (

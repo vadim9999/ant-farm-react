@@ -1,4 +1,4 @@
-import React, { useContext, useReducer } from "react";
+import { useContext } from "react";
 import { Button, Dropdown, Menu, MenuProps } from "antd";
 import {
   FullscreenOutlined,
@@ -11,7 +11,6 @@ import "./index.scss";
 import { API_URL } from "api/api";
 import { VideoResolution } from "types";
 import { GlobalContext } from "context/GlobalContextComponent";
-import { State } from "./typesVideoPlayer";
 import videoService from "api/video-service/video.service";
 
 const onFullScreen = () => {
