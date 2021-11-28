@@ -11,6 +11,15 @@ const ukUa = {
         settings: "Налаштування",
       },
     },
+    dashboard: {
+      inSots: "В сотах",
+      inArena: "В арені",
+      inRoom: "В кімнаті",
+      waterLevel: "Рівень води",
+      notifications: {
+        errorGettingSensorsData: "Помилка в отриманні даних з датчиків",
+      },
+    },
   },
 };
 

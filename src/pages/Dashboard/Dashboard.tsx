@@ -3,6 +3,7 @@ import { Card, Col, notification, Progress, Row, Space } from "antd";
 import { SensorsData } from "api/settings-service/typesResponse";
 import sensorsService from "api/sensors-service/sensors.service";
 import { GlobalContext } from "context/GlobalContextComponent";
+import { useTranslation } from "react-i18next";
 
 // TODO move to separate file styles.ts
 
@@ -30,20 +31,21 @@ const strokeColor = {
 const TEMPERATURE_OFFSET = 30;
 
 const Dashboard = () => {
-  const { globalState } = useContext(GlobalContext);
+  const { t } = useTranslation("translation", { keyPrefix: "dashboard" });
   const [sensors, setSensors] = useState<SensorsData | null>(null);
 
   useEffect(() => {
     const getSensorsData = () => {
       return sensorsService.getSensorsData().then((data) => {
-        console.log("data", data);
         setSensors(data);
       });
     };
 
     const interval = setInterval(() => {
       getSensorsData().catch(() => {
-        notification.error({ message: "Помилка в отриманні даних" });
+        notification.error({
+          message: t("notifications.errorGettingSensorsData"),
+        });
         clearInterval(interval);
       });
     }, 5000);
@@ -52,7 +54,6 @@ const Dashboard = () => {
 
     return () => {
       clearInterval(interval);
-      console.log("cleared");
     };
   }, []);
 
@@ -62,7 +63,7 @@ const Dashboard = () => {
     <div>
       <Row gutter={[10, 10]}>
         <Col>
-          <Card title="В сотах">
+          <Card title={t("inSots")}>
             <Space>
               <Progress type="dashboard" percent={sensorsValues.sot.hum} />
               <Progress
@@ -75,7 +76,7 @@ const Dashboard = () => {
           </Card>
         </Col>
         <Col>
-          <Card title="В арені">
+          <Card title={t("inArena")}>
             <Space>
               <Progress type="dashboard" percent={sensorsValues.arena.hum} />
               <Progress
@@ -88,7 +89,7 @@ const Dashboard = () => {
           </Card>
         </Col>
         <Col>
-          <Card title="В кімнаті">
+          <Card title={t("inRoom")}>
             <Space>
               <Progress type="dashboard" percent={sensorsValues.outside.hum} />
               <Progress
@@ -101,7 +102,7 @@ const Dashboard = () => {
           </Card>
         </Col>
         <Col>
-          <Card title="Рівень води">
+          <Card title={t("waterLevel")}>
             <Progress percent={sensors?.waterLevel} steps={5} />
           </Card>
         </Col>

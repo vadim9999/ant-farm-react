@@ -11,6 +11,15 @@ const enGB = {
         settings: "Settings",
       },
     },
+    dashboard: {
+      inSots: "In sots",
+      inArena: "In arena",
+      inRoom: "In room",
+      waterLevel: "Water level",
+      notifications: {
+        errorGettingSensorsData: "Error getting sensors data",
+      },
+    },
   },
 };
 
