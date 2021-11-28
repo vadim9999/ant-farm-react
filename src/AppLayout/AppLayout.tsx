@@ -23,7 +23,7 @@ const AppLayout = () => {
   const location = useLocation();
   const { dispatch } = useContext(GlobalContext);
 
-  const { t } = useTranslation();
+  const { t } = useTranslation("translation", { keyPrefix: "appLayout" });
 
   useEffect(() => {
     Promise.all([getUserId(), videoService.isStreaming()])
@@ -49,7 +49,7 @@ const AppLayout = () => {
         <div className="logoWithText">
           <img className="logo" src={logo} alt="logo" />
           <Typography.Text strong className="text">
-            {t("appLayout.header.logoText")}
+            {t("header.logoText")}
           </Typography.Text>
         </div>
         <div className="locale">
@@ -80,7 +80,7 @@ const AppLayout = () => {
               <Link to={routes.dashboard}>
                 <Space>
                   <DashboardOutlined />
-                  {t("appLayout.sidebar.dashboard")}
+                  {t("sidebar.dashboard")}
                 </Space>
               </Link>
             </Menu.Item>
@@ -88,7 +88,7 @@ const AppLayout = () => {
               <Link to={routes.videoStreaming}>
                 <Space>
                   <VideoCameraOutlined />
-                  {t("appLayout.sidebar.videoStreaming")}
+                  {t("sidebar.videoStreaming")}
                 </Space>
               </Link>
             </Menu.Item>
@@ -96,7 +96,7 @@ const AppLayout = () => {
               <Link to={routes.mediaFiles}>
                 <Space>
                   <FolderOpenOutlined />
-                  {t("appLayout.sidebar.mediaFiles")}
+                  {t("sidebar.mediaFiles")}
                 </Space>
               </Link>
             </Menu.Item>
@@ -104,7 +104,7 @@ const AppLayout = () => {
               <Link to={routes.settings}>
                 <Space>
                   <SettingOutlined />
-                  {t("appLayout.sidebar.settings")}
+                  {t("sidebar.settings")}
                 </Space>
               </Link>
             </Menu.Item>
