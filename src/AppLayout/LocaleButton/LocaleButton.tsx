@@ -9,11 +9,9 @@ const languages = {
 };
 
 const LocaleButton = () => {
-  const { globalState, dispatch } = useContext(GlobalContext);
   const { i18n } = useTranslation();
   const onClickMenuItem: MenuProps["onClick"] = (e) => {
     i18n.changeLanguage(e.key);
-    // dispatch({ locale: e.key as Locale });
   };
 
   const menu = (

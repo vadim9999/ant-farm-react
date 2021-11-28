@@ -1,7 +1,15 @@
 const ukUa = {
   translation: {
     appLayout: {
-      logoText: "Мурашина ферма",
+      header: {
+        logoText: "Мурашина ферма",
+      },
+      sidebar: {
+        dashboard: "Моніторинг",
+        videoStreaming: "Відеотрансляція",
+        mediaFiles: "Медіафайли",
+        settings: "Налаштування",
+      },
     },
   },
 };

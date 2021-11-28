@@ -1,7 +1,15 @@
 const enGB = {
   translation: {
     appLayout: {
-      logoText: "Ant Farm",
+      header: {
+        logoText: "Ant Farm",
+      },
+      sidebar: {
+        dashboard: "Dashboard",
+        videoStreaming: "Video streaming",
+        mediaFiles: "Media files",
+        settings: "Settings",
+      },
     },
   },
 };

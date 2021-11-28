@@ -19,17 +19,9 @@ import LocaleButton from "./LocaleButton/LocaleButton";
 import { useTranslation } from "react-i18next";
 const { Header, Sider, Content } = Layout;
 
-const locales = {
-  [Locale.En]: "Ant Farm",
-  [Locale.Uk]: "Мурашина ферма",
-};
-
 const AppLayout = () => {
   const location = useLocation();
-  const { globalState, dispatch } = useContext(GlobalContext);
-  console.log("location", location);
-  const [isLoading, setIsLoading] = useState(true);
-  console.log("logog", logo);
+  const { dispatch } = useContext(GlobalContext);
 
   const { t } = useTranslation();
 
@@ -40,8 +32,6 @@ const AppLayout = () => {
           userId: String(userIdData.data),
           isStreaming: isStreamingData.data === "True" ? true : false,
         });
-
-        // setIsLoading(false);
       })
       .catch(() => {
         notification.error({
@@ -61,7 +51,7 @@ const AppLayout = () => {
         <div className="logoWithText">
           <img className="logo" src={logo} alt="logo" />
           <Typography.Text strong className="text">
-            {t("appLayout.logoText")}
+            {t("appLayout.header.logoText")}
           </Typography.Text>
         </div>
         <div className="locale">
@@ -92,21 +82,24 @@ const AppLayout = () => {
             <Menu.Item key={routes.dashboard}>
               <Link to={routes.dashboard}>
                 <Space>
-                  <DashboardOutlined /> Моніторинг
+                  <DashboardOutlined />
+                  {t("appLayout.sidebar.dashboard")}
                 </Space>
               </Link>
             </Menu.Item>
             <Menu.Item key={routes.videoStreaming}>
               <Link to={routes.videoStreaming}>
                 <Space>
-                  <VideoCameraOutlined /> Відеотрансляція
+                  <VideoCameraOutlined />
+                  {t("appLayout.sidebar.videoStreaming")}
                 </Space>
               </Link>
             </Menu.Item>
             <Menu.Item key={routes.mediaFiles}>
               <Link to={routes.mediaFiles}>
                 <Space>
-                  <FolderOpenOutlined /> Медіафайли
+                  <FolderOpenOutlined />
+                  {t("appLayout.sidebar.mediaFiles")}
                 </Space>
               </Link>
             </Menu.Item>
@@ -114,7 +107,7 @@ const AppLayout = () => {
               <Link to={routes.settings}>
                 <Space>
                   <SettingOutlined />
-                  Налаштування
+                  {t("appLayout.sidebar.settings")}
                 </Space>
               </Link>
             </Menu.Item>
