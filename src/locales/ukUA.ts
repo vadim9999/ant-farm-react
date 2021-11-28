@@ -20,6 +20,10 @@ const ukUa = {
         errorGettingSensorsData: "Помилка в отриманні даних з датчиків",
       },
     },
+    mediaFiles: {
+      file: "Файл",
+      acceptDeleteFile: "Ви впевнені що хочете видалити файл?",
+    },
   },
 };
 

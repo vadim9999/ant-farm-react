@@ -8,7 +8,6 @@ const MediaFiles = () => {
   const getFiles = () => {
     videoService.getMediaFiles().then((data) => {
       setFiles(data);
-      console.log("data", data);
     });
   };
 

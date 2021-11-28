@@ -1,11 +1,13 @@
-import React from 'react'
+import React from "react";
 import { DeleteOutlined, DownloadOutlined } from "@ant-design/icons";
 import { Button, Popconfirm, Space, Table } from "antd";
 import { dowloadFile } from "utils/downloadFile";
 import { ITableMediaFiles } from "./typesTableMediaFiles";
-import videoService from 'api/video-service/video.service';
+import videoService from "api/video-service/video.service";
+import { useTranslation } from "react-i18next";
 
 const TableMediaFiles = ({ mediaFiles, getFiles }: ITableMediaFiles) => {
+  const { t } = useTranslation("translation", { keyPrefix: "mediaFiles" });
   const dataSource = mediaFiles.map((fileName, index) => ({
     key: index,
     fileName,
@@ -25,7 +27,7 @@ const TableMediaFiles = ({ mediaFiles, getFiles }: ITableMediaFiles) => {
 
   const columns = [
     {
-      title: "Файл",
+      title: t("file"),
       render: (_: any, record: { fileName: string }) => record.fileName,
     },
     {
@@ -41,7 +43,7 @@ const TableMediaFiles = ({ mediaFiles, getFiles }: ITableMediaFiles) => {
             <DownloadOutlined style={{ fontSize: 18 }} />
           </Button>
           <Popconfirm
-            title="Ви впевнені що хочете видалити файл?"
+            title={t("acceptDeleteFile")}
             onConfirm={onDeleteMediaFile(record.fileName)}
           >
             <Button type="text" danger shape="circle">

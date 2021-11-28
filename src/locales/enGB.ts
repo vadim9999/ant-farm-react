@@ -20,6 +20,10 @@ const enGB = {
         errorGettingSensorsData: "Error getting sensors data",
       },
     },
+    mediaFiles: {
+      file: "File",
+      acceptDeleteFile: "Are you sure to delete the file?",
+    },
   },
 };
 
