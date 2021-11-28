@@ -46,8 +46,6 @@ const AppLayout = () => {
         className="header"
         // style={{ position: "fixed", zIndex: 1, width: "100%" }}
       >
-        {/* <div className="logo" /> */}
-        {/* <div style={{ display: "flex", justifyContent: "space-between" }}> */}
         <div className="logoWithText">
           <img className="logo" src={logo} alt="logo" />
           <Typography.Text strong className="text">
@@ -57,7 +55,6 @@ const AppLayout = () => {
         <div className="locale">
           <LocaleButton />
         </div>
-        {/* </div> */}
       </Header>
       <Layout className="site-layout">
         <Sider
