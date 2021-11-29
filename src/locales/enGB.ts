@@ -24,6 +24,17 @@ const enGB = {
       file: "File",
       acceptDeleteFile: "Are you sure to delete the file?",
     },
+    settings: {
+      youtubeSettings: "YouTuber settings",
+      feedSettings: "Feed settings",
+      notifications: {
+        savedYoutubeSettings:
+          "Settings for streaming in YouTube have been saved!",
+        savedFeedSettings: "Feed settings have been saved!",
+        powerOff: "Powering off...",
+        reboot: "Rebooting...",
+      },
+    },
   },
 };
 

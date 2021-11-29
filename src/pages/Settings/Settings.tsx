@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer, useState } from "react";
+import React, { useContext, useEffect, useReducer } from "react";
 import { Button, Card, Col, notification, Row, Space, Spin } from "antd";
 import settingsService from "api/settings-service/settings.service";
 import { GlobalContext } from "context/GlobalContextComponent";
@@ -7,7 +7,7 @@ import { StreamingSettingsFormValues } from "./StreamingSettingsForm/typesStream
 import FeedSettingsForm from "./FeedSettingsForm/FeedSettingsForm";
 import { FeedSettingsFormValues } from "./FeedSettingsForm/typesFeedSettingsForm";
 import { PoweroffOutlined, RetweetOutlined } from "@ant-design/icons";
-import videoService from "api/video-service/video.service";
+import { useTranslation } from "react-i18next";
 
 interface State {
   initialValuesStream: StreamingSettingsFormValues | null;
@@ -15,6 +15,8 @@ interface State {
 }
 
 const Settings = () => {
+  const { t } = useTranslation("translation", { keyPrefix: "settings" });
+
   const { globalState } = useContext(GlobalContext);
   const [state, setState] = useReducer(
     (prevState: State, nextState: Partial<State>): State => ({
@@ -68,7 +70,7 @@ const Settings = () => {
         console.log("data", data);
         onGetStreamSettings();
         notification.success({
-          message: "Налаштування для відеотрансляції в YouTube збережені",
+          message: t("notifications.savedYoutubeSettings"),
         });
       });
   };
@@ -83,7 +85,7 @@ const Settings = () => {
         console.log("data1", data);
         onGetFeederSettings();
         notification.success({
-          message: "Налаштування для годівниці збережені",
+          message: t("notifications.savedFeedSettings"),
         });
       });
   };
@@ -91,7 +93,7 @@ const Settings = () => {
   const onShutDownRPI = () => {
     settingsService.shutDownRPI({ userId: globalState.userId }).then(() => {
       notification.success({
-        message: "Вимикання...",
+        message: t("notifications.powerOff"),
       });
     });
   };
@@ -99,7 +101,7 @@ const Settings = () => {
   const onRebootRPI = () => {
     settingsService.rebootRPI({ userId: globalState.userId }).then(() => {
       notification.success({
-        message: "Перезавантаження...",
+        message: t("notifications.rebooting"),
       });
     });
   };
@@ -109,7 +111,7 @@ const Settings = () => {
     <>
       <Row>
         <Col style={{ width: 400 }}>
-          <Card title="Youtube settings">
+          <Card title={t("youtubeSettings")}>
             {state.initialValuesStream ? (
               <StreamingSettingsForm
                 initialValues={state.initialValuesStream}
@@ -123,7 +125,7 @@ const Settings = () => {
       </Row>
       <Row style={{ marginTop: 15 }}>
         <Col style={{ width: 400 }}>
-          <Card title="Налаштування годівниці">
+          <Card title={t("feedSettings")}>
             {state.initialValuesFeeder ? (
               <FeedSettingsForm
                 onSubmit={onSaveFeedSettings}

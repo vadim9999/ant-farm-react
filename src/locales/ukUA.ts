@@ -24,6 +24,17 @@ const ukUa = {
       file: "Файл",
       acceptDeleteFile: "Ви впевнені що хочете видалити файл?",
     },
+    settings: {
+      youtubeSettings: "Налаштування для YouTube",
+      feedSettings: "Налаштування годівниці",
+      notifications: {
+        savedYoutubeSettings:
+          "Налаштування для відеотрансляції в YouTube збережені!",
+        savedFeedSettings: "Налаштування для годівниці збережені",
+        powerOff: "Вимикання...",
+        reboot: "Перезавантаження...",
+      },
+    },
   },
 };
 
