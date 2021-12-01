@@ -1,21 +1,19 @@
+import React, { useContext, useState } from "react";
 import { CameraOutlined } from "@ant-design/icons";
 import { Button, Input, Modal, notification, Select } from "antd";
 import { GlobalContext } from "context/GlobalContextComponent";
-import React, { useContext, useState } from "react";
 import CreatePictureForm from "./CreatePictureForm/CreatePictureForm";
 import { FormValues } from "./CreatePictureForm/typesCreatePictureForm";
 import { useLocation } from "react-router";
 import videoService from "api/video-service/video.service";
-
-const { Option } = Select;
+import { useTranslation } from "react-i18next";
 
 const CreatePicture = () => {
   const { globalState } = useContext(GlobalContext);
-  const location = useLocation();
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const locales = {
-    createImage: "Створити зображення",
-  };
+  const { t } = useTranslation("translation", {
+    keyPrefix: "videoStreaming.takePicture",
+  });
 
   const onCloseModal = () => {
     setIsModalVisible(false);
@@ -30,7 +28,9 @@ const CreatePicture = () => {
       })
       .then(() => {
         notification.success({
-          message: `Зображення "${values.filename}" створено успішно`,
+          message: t("notifications.createdSuccessfully", {
+            fileName: values.filename,
+          }),
         });
       });
 
@@ -50,11 +50,11 @@ const CreatePicture = () => {
         size="large"
         disabled={!globalState.isStartedPreview || globalState.isStreaming}
       >
-        {locales.createImage}
+        {t("takePicture")}
       </Button>
 
       <Modal
-        title={locales.createImage}
+        title={t("takePicture")}
         centered
         visible={isModalVisible}
         footer={null}

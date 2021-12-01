@@ -51,6 +51,27 @@ const enGB = {
         reboot: "Rebooting...",
       },
     },
+    videoStreaming: {
+      takePicture: {
+        takePicture: "Take picture",
+        notifications: {
+          createdSuccessfully: 'Зображення "{{fileName}}" створено успішно`',
+        },
+        takePictureForm: {
+          fileName: "Image name",
+          quality: "Image quality",
+          cancel: "Cancel",
+          submit: "Submit",
+          schema: {
+            inputFileName: "Input image name",
+          },
+        },
+      },
+      popup: {
+        noSettings: "Settings is empty please go to the ",
+        settings: "Settings",
+      },
+    },
   },
 };
 

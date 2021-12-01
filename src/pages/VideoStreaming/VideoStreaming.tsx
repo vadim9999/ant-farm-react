@@ -10,10 +10,14 @@ import { Link } from "react-router-dom";
 import { routes } from "routes";
 import FeedNow from "./FeedNow/FeedNow";
 import settingsService from "api/settings-service/settings.service";
+import { useTranslation } from "react-i18next";
 
 const VideoStreaming = () => {
   const { globalState } = useContext(GlobalContext);
   const [hasStreamSettings, setHasStreamSettings] = useState(false);
+  const { t } = useTranslation("translation", {
+    keyPrefix: "videoStreaming",
+  });
 
   useEffect(() => {
     settingsService
@@ -40,8 +44,8 @@ const VideoStreaming = () => {
                   trigger="hover"
                   content={
                     <div>
-                      Налаштування для трансляції не встановлені перейдіть на
-                      сторінку <Link to={routes.settings}> Налаштування</Link>
+                      {t("popup.noSettings")}
+                      <Link to={routes.settings}>{t("popup.settings")}</Link>
                     </div>
                   }
                 >

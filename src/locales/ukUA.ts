@@ -51,6 +51,28 @@ const ukUa = {
         reboot: "Перезавантаження...",
       },
     },
+    videoStreaming: {
+      takePicture: {
+        takePicture: "Створити зображення",
+        notifications: {
+          createdSuccessfully: 'Зображення "{{fileName}}" створено успішно`',
+        },
+        takePictureForm: {
+          fileName: "Назва зображення",
+          quality: "Якість зображення",
+          cancel: "Відмінити",
+          submit: "Підтвердити",
+          schema: {
+            inputFileName: "Введіть назву зображення",
+          },
+        },
+      },
+      popup: {
+        noSettings:
+          "Налаштування для трансляції не встановлені перейдіть на сторінку ",
+        settings: "Налаштування",
+      },
+    },
   },
 };
 
