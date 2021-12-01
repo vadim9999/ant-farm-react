@@ -67,6 +67,12 @@ const ukUa = {
           },
         },
       },
+      feedNow: {
+        feedNow: "Погодувати зараз",
+        notifications: {
+          feededSuccessfully: "Погодовано успішно",
+        },
+      },
       popup: {
         noSettings:
           "Налаштування для трансляції не встановлені перейдіть на сторінку ",

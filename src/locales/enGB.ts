@@ -67,6 +67,12 @@ const enGB = {
           },
         },
       },
+      feedNow: {
+        feedNow: "Feed now",
+        notifications: {
+          feededSuccessfully: "Feed successfully",
+        },
+      },
       popup: {
         noSettings: "Settings is empty please go to the ",
         settings: "Settings",

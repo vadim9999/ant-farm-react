@@ -3,19 +3,18 @@ import { Button, notification } from "antd";
 import sensorsService from "api/sensors-service/sensors.service";
 import { GlobalContext } from "context/GlobalContextComponent";
 import React, { useContext } from "react";
-
-const locales = {
-  feedNow: "Погодувати зараз",
-  feeded: "Погодовано успішно",
-};
+import { useTranslation } from "react-i18next";
 
 const FeedNow = () => {
   const { globalState } = useContext(GlobalContext);
+  const { t } = useTranslation("translation", {
+    keyPrefix: "videoStreaming.feedNow",
+  });
 
   const onFeedNow = () => {
     sensorsService.feedNow({ userId: globalState.userId }).then(() => {
       notification.success({
-        message: locales.feeded,
+        message: t("notifications.feededSuccessfully"),
       });
     });
   };
@@ -27,7 +26,7 @@ const FeedNow = () => {
       size="large"
       icon={<CoffeeOutlined />}
     >
-      {locales.feedNow}
+      {t("feedNow")}
     </Button>
   );
 };
