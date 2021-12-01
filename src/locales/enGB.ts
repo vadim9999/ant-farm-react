@@ -82,6 +82,25 @@ const enGB = {
           submit: "Submit",
         },
       },
+      videoRecording: {
+        startRecording: "Start recording",
+        videoRecord: "Video record",
+        stopRecording: "Stop recording",
+        videoRecordingForm: {
+          fileName: "File name",
+          quality: "Quality",
+          cancel: "Cancel",
+          submit: "Submit",
+          schema: {
+            inputFileName: "Input file name",
+          },
+        },
+        notifications: {
+          recordCreatedSuccessfully:
+            "The video record have been created successfully",
+          recordStartedSuccessfully: "Started recording",
+        },
+      },
       popup: {
         noSettings: "Settings is empty please go to the ",
         settings: "Settings",

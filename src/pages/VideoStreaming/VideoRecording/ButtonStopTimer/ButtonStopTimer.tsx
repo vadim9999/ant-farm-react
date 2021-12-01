@@ -3,12 +3,16 @@ import { PauseOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import dayjs, { Dayjs } from "dayjs";
 import { Props } from "./typesButtonStopTimer";
+import { useTranslation } from "react-i18next";
 
 const ButtonStopTimer = ({ onStopRecording }: Props) => {
   const [state, setState] = useState<{
     startedTime: Dayjs;
     diffTimeInSeconds: number;
   }>({ startedTime: dayjs(), diffTimeInSeconds: 0 });
+  const { t } = useTranslation("translation", {
+    keyPrefix: "videoStreaming.videoRecording",
+  });
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -38,8 +42,8 @@ const ButtonStopTimer = ({ onStopRecording }: Props) => {
       size="large"
       onClick={onStopRecording}
     >
-      Зупинити запис {(hours < 10 ? "0" : "") + hours}:
-      {(minutes < 10 ? "0" : "") + minutes}:
+      {t("stopRecording")}
+      {(hours < 10 ? "0" : "") + hours}:{(minutes < 10 ? "0" : "") + minutes}:
       {(seconds < 10 ? "0" : "") + seconds}
     </Button>
   );

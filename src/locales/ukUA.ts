@@ -82,6 +82,24 @@ const ukUa = {
           submit: "Підтвердити",
         },
       },
+      videoRecording: {
+        startRecording: "Почати запис",
+        videoRecord: "Відеозапис",
+        stopRecording: "Зупинити запис",
+        videoRecordingForm: {
+          fileName: "Ім'я файлу",
+          quality: "Якість",
+          cancel: "Скасувати",
+          submit: "Підтвердити",
+          schema: {
+            inputFileName: "Введіть назву відеофайлу",
+          },
+        },
+        notifications: {
+          recordCreatedSuccessfully: "Запис створено",
+          recordStartedSuccessfully: "Запис почався",
+        },
+      },
       popup: {
         noSettings:
           "Налаштування для трансляції не встановлені перейдіть на сторінку ",

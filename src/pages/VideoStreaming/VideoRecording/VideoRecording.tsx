@@ -6,20 +6,20 @@ import ButtonStopTimer from "./ButtonStopTimer/ButtonStopTimer";
 import { FormValues } from "./VideoRecordingForm/types";
 import VideoRecordingForm from "./VideoRecordingForm/VideoRecordingForm";
 import videoService from "api/video-service/video.service";
+import { useTranslation } from "react-i18next";
 
 const VideoRecording = () => {
   const { dispatch, globalState } = useContext(GlobalContext);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const { t } = useTranslation("translation", {
+    keyPrefix: "videoStreaming.videoRecording",
+  });
 
   const onOpenModal = () => {
-    console.log("click");
-
     setIsModalVisible(true);
   };
 
   const onSubmitModal = (values: FormValues) => {
-    console.log("data", values);
-
     videoService
       .startRecording({
         userId: globalState.userId,
@@ -28,7 +28,9 @@ const VideoRecording = () => {
       })
       .then(() => {
         dispatch({ isRecording: true });
-        notification.success({ message: `Запис почався` });
+        notification.success({
+          message: t("notifications.recordStartedSuccessfully"),
+        });
       });
     setIsModalVisible(false);
   };
@@ -40,7 +42,9 @@ const VideoRecording = () => {
   const onStopRecording = () => {
     videoService.stopRecording({ userId: globalState.userId }).then(() => {
       dispatch({ isRecording: false });
-      notification.success({ message: `Запис створено` });
+      notification.success({
+        message: t("notifications.recordCreatedSuccessfully"),
+      });
     });
   };
 
@@ -58,12 +62,12 @@ const VideoRecording = () => {
           size="large"
           disabled={!globalState.isStartedPreview || globalState.isStreaming}
         >
-          Почати запис
+          {t("startRecording")}
         </Button>
       )}
 
       <Modal
-        title="Відеозапис"
+        title={t("videoRecord")}
         centered
         visible={isModalVisible}
         footer={null}
