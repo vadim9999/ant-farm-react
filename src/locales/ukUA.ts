@@ -38,6 +38,10 @@ const ukUa = {
         youtubeLink: "Посилання youtube",
         youtubeKey: "Ключ youtube",
         submit: "Зберегти",
+        schema: {
+          inputLink: "Введіть посилання",
+          inputKey: "Введіть ключ",
+        },
       },
       notifications: {
         savedYoutubeSettings:

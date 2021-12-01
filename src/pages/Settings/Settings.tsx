@@ -82,7 +82,6 @@ const Settings = () => {
         userId: globalState.userId,
       })
       .then((data) => {
-        console.log("data1", data);
         onGetFeederSettings();
         notification.success({
           message: t("notifications.savedFeedSettings"),

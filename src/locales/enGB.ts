@@ -37,7 +37,11 @@ const enGB = {
       streamingSettingsForm: {
         youtubeLink: "YouTube link",
         youtubeKey: "YouTube key",
-        submit: "Submit", 
+        submit: "Submit",
+        schema: {
+          inputLink: "Input link",
+          inputKey: "Input key",
+        },
       },
       notifications: {
         savedYoutubeSettings:

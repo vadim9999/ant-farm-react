@@ -4,22 +4,16 @@ import { Rule } from "rc-field-form/lib/interface";
 import { Props } from "./typesStreamingSettingsForm";
 import { useTranslation } from "react-i18next";
 
-const schema: Record<string, Rule> = {
-  youtubeLink: { required: true, message: "Введіть посилання" },
-  youtubeKey: { required: true, message: "Введіть ключ youtube" },
-};
-
-const locales = {
-  youtubeLink: "Посилання youtube",
-  youtubeKey: "Ключ youtube",
-  submit: "Зберегти",
-};
-
 const StreamingSettingsForm = ({ onSubmit, initialValues }: Props) => {
   const [form] = Form.useForm();
   const { t } = useTranslation("translation", {
     keyPrefix: "settings.streamingSettingsForm",
   });
+
+  const schema: Record<string, Rule> = {
+    youtubeLink: { required: true, message: t("schema.inputLink") },
+    youtubeKey: { required: true, message: t("schema.inputKey") },
+  };
 
   useEffect(() => {
     form.resetFields();
