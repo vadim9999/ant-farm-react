@@ -34,6 +34,11 @@ const enGB = {
         interval: "Interval (days)",
         submit: "Submit",
       },
+      streamingSettingsForm: {
+        youtubeLink: "YouTube link",
+        youtubeKey: "YouTube key",
+        submit: "Submit", 
+      },
       notifications: {
         savedYoutubeSettings:
           "Settings for streaming in YouTube have been saved!",

@@ -34,6 +34,11 @@ const ukUa = {
         interval: "Інтервал (днях)",
         submit: "Зберегти",
       },
+      streamingSettingsForm: {
+        youtubeLink: "Посилання youtube",
+        youtubeKey: "Ключ youtube",
+        submit: "Зберегти",
+      },
       notifications: {
         savedYoutubeSettings:
           "Налаштування для відеотрансляції в YouTube збережені!",

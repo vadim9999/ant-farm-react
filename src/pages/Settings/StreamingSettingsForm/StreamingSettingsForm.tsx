@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Button, Form, Input } from "antd";
 import { Rule } from "rc-field-form/lib/interface";
 import { Props } from "./typesStreamingSettingsForm";
+import { useTranslation } from "react-i18next";
 
 const schema: Record<string, Rule> = {
   youtubeLink: { required: true, message: "Введіть посилання" },
@@ -16,6 +17,9 @@ const locales = {
 
 const StreamingSettingsForm = ({ onSubmit, initialValues }: Props) => {
   const [form] = Form.useForm();
+  const { t } = useTranslation("translation", {
+    keyPrefix: "settings.streamingSettingsForm",
+  });
 
   useEffect(() => {
     form.resetFields();
@@ -31,20 +35,20 @@ const StreamingSettingsForm = ({ onSubmit, initialValues }: Props) => {
       <Form.Item
         name="youtubeLink"
         rules={[schema.youtubeLink]}
-        label={locales.youtubeLink}
+        label={t("youtubeLink")}
       >
         <Input allowClear />
       </Form.Item>
       <Form.Item
         name="youtubeKey"
-        label={locales.youtubeKey}
+        label={t("youtubeKey")}
         rules={[schema.youtubeKey]}
       >
         <Input allowClear />
       </Form.Item>
       <Form.Item>
         <Button htmlType="submit" type="primary">
-          {locales.submit}
+          {t("submit")}
         </Button>
       </Form.Item>
     </Form>
