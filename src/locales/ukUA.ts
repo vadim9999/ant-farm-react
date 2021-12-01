@@ -30,6 +30,10 @@ const ukUa = {
       farmControl: "Керування фермою",
       powerOff: "Вимкнути",
       reboot: "Перезавантажити",
+      feedSettingsForm: {
+        interval: "Інтервал (днях)",
+        submit: "Зберегти",
+      },
       notifications: {
         savedYoutubeSettings:
           "Налаштування для відеотрансляції в YouTube збережені!",

@@ -30,6 +30,10 @@ const enGB = {
       farmControl: "Farm control",
       powerOff: "Power off",
       reboot: "Reboot",
+      feedSettingsForm: {
+        interval: "Interval (days)",
+        submit: "Submit",
+      },
       notifications: {
         savedYoutubeSettings:
           "Settings for streaming in YouTube have been saved!",
