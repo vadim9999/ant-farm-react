@@ -139,21 +139,21 @@ const Settings = () => {
       </Row>
       <Row>
         <Col>
-          <Card title="Керування фермою">
+          <Card title={t("farmControl")}>
             <Space direction="vertical">
               <Button
                 type="primary"
                 icon={<PoweroffOutlined />}
                 onClick={onShutDownRPI}
               >
-                Вимкнути
+                {t("powerOff")}
               </Button>
               <Button
                 type="primary"
                 icon={<RetweetOutlined />}
                 onClick={onRebootRPI}
               >
-                Перезавантажити
+                {t("reboot")}
               </Button>
             </Space>
           </Card>

@@ -27,6 +27,9 @@ const ukUa = {
     settings: {
       youtubeSettings: "Налаштування для YouTube",
       feedSettings: "Налаштування годівниці",
+      farmControl: "Керування фермою",
+      powerOff: "Вимкнути",
+      reboot: "Перезавантажити",
       notifications: {
         savedYoutubeSettings:
           "Налаштування для відеотрансляції в YouTube збережені!",

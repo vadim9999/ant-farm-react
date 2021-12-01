@@ -27,6 +27,9 @@ const enGB = {
     settings: {
       youtubeSettings: "YouTuber settings",
       feedSettings: "Feed settings",
+      farmControl: "Farm control",
+      powerOff: "Power off",
+      reboot: "Reboot",
       notifications: {
         savedYoutubeSettings:
           "Settings for streaming in YouTube have been saved!",
