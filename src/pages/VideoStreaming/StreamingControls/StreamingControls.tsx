@@ -8,10 +8,9 @@ import { API_URL } from "api/api";
 import videoService from "api/video-service/video.service";
 import { GlobalContext } from "context/GlobalContextComponent";
 import React, { useContext, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { StreamingForm } from "./StreamingForm/StreamingForm";
 import { FormValues } from "./StreamingForm/typesStreamingForm";
-
-const { Option } = Select;
 
 const StreamingControls = ({
   isDisableStartStreaming,
@@ -20,10 +19,9 @@ const StreamingControls = ({
 }) => {
   const { globalState, dispatch } = useContext(GlobalContext);
   const [isModalVisible, setIsModalVisible] = useState(false);
-
-  const locales = {
-    startStreaming: "Почати трансляцію",
-  };
+  const { t } = useTranslation("translation", {
+    keyPrefix: "videoStreaming.streamingControls",
+  });
 
   const onCloseModal = () => {
     setIsModalVisible(false);
@@ -77,7 +75,7 @@ const StreamingControls = ({
           size="large"
           onClick={onStopStream}
         >
-          Зупинити трансляцію
+          {t("stopStreaming")}
         </Button>
       ) : (
         <Button
@@ -87,12 +85,12 @@ const StreamingControls = ({
           size="large"
           onClick={onOpenModal}
         >
-          {locales.startStreaming}
+          {t("startStreaming")}
         </Button>
       )}
 
       <Modal
-        title={locales.startStreaming}
+        title={t("startStreaming")}
         centered
         visible={isModalVisible}
         footer={null}

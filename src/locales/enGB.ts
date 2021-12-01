@@ -73,6 +73,15 @@ const enGB = {
           feededSuccessfully: "Feed successfully",
         },
       },
+      streamingControls: {
+        startStreaming: "Start streaming",
+        stopStreaming: "Stop streaming",
+        streamingForm: {
+          quality: "Image quality",
+          cancel: "Cancel",
+          submit: "Submit",
+        },
+      },
       popup: {
         noSettings: "Settings is empty please go to the ",
         settings: "Settings",

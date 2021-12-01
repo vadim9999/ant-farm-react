@@ -60,7 +60,7 @@ const ukUa = {
         takePictureForm: {
           fileName: "Назва зображення",
           quality: "Якість зображення",
-          cancel: "Відмінити",
+          cancel: "Скасувати",
           submit: "Підтвердити",
           schema: {
             inputFileName: "Введіть назву зображення",
@@ -71,6 +71,15 @@ const ukUa = {
         feedNow: "Погодувати зараз",
         notifications: {
           feededSuccessfully: "Погодовано успішно",
+        },
+      },
+      streamingControls: {
+        startStreaming: "Почати трансляцію",
+        stopStreaming: "Зупинити трансляцію",
+        streamingForm: {
+          quality: "Якість зображення",
+          cancel: "Скасувати",
+          submit: "Підтвердити",
         },
       },
       popup: {
