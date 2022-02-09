@@ -67,7 +67,6 @@ const Settings = () => {
         key: formValues.youtubeKey,
       })
       .then((data) => {
-        console.log("data", data);
         onGetStreamSettings();
         notification.success({
           message: t("notifications.savedYoutubeSettings"),
