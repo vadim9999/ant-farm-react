@@ -25,16 +25,6 @@ export interface TakePicture {
   userId: string;
 }
 
-export interface GetStreamSettings {
-  userId: string;
-}
-
-export interface SaveStreamSettings {
-  userId: string;
-  youtube: string;
-  key: string;
-}
-
 export interface WaitStartPreview {
   userId: string;
 }

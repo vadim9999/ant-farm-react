@@ -1,15 +1,10 @@
-export interface GetStreamSettingsResponse {
-  key: string;
-  youtube: string;
-}
-
-export enum SensorDHTName {
+enum SensorDHTName {
   Sot = "sot",
   Outside = "outside",
   Arena = "arena",
 }
 
-export interface SensorDHT {
+interface SensorDHT {
   temp: number;
   hum: number;
 }
