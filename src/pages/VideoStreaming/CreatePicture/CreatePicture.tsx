@@ -1,10 +1,9 @@
 import React, { useContext, useState } from "react";
 import { CameraOutlined } from "@ant-design/icons";
-import { Button, Input, Modal, notification, Select } from "antd";
+import { Button, Modal, notification } from "antd";
 import { GlobalContext } from "context/GlobalContextComponent";
 import CreatePictureForm from "./CreatePictureForm/CreatePictureForm";
 import { FormValues } from "./CreatePictureForm/typesCreatePictureForm";
-import { useLocation } from "react-router";
 import videoService from "api/video-service/video.service";
 import { useTranslation } from "react-i18next";
 

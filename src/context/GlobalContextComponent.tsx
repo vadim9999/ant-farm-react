@@ -1,4 +1,4 @@
-import React, { createContext, useMemo, useReducer } from "react";
+import React, { useMemo, useReducer } from "react";
 import { VideoResolution } from "types";
 
 export enum Locale {

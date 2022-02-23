@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Link, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import VideoStreaming from "pages/VideoStreaming/VideoStreaming";
 import Settings from "pages/Settings/Settings";
 import MediaFiles from "./pages/MediaFiles/MediaFiles";

@@ -12,7 +12,6 @@ import { API_URL } from "api/api";
 import { VideoResolution } from "types";
 import { GlobalContext } from "context/GlobalContextComponent";
 import videoService from "api/video-service/video.service";
-import { useTranslation } from "react-i18next";
 
 const onFullScreen = () => {
   var fullScreen = document.getElementById("fullScreen");

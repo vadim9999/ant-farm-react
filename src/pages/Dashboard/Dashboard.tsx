@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Col, notification, Progress, Row, Space } from "antd";
 import { SensorsData } from "api/settings-service/typesResponse";
 import sensorsService from "api/sensors-service/sensors.service";
-import { GlobalContext } from "context/GlobalContextComponent";
 import { useTranslation } from "react-i18next";
 
 // TODO move to separate file styles.ts

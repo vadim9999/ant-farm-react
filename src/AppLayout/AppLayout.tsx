@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Layout, Menu, notification, Space, Spin, Typography } from "antd";
+import React, { useContext, useEffect } from "react";
+import { Layout, Menu, notification, Space, Typography } from "antd";
 import Router from "Router";
 import { Link, useLocation } from "react-router-dom";
 import { routes } from "routes";
 import { getUserId } from "api/api";
 import videoService from "api/video-service/video.service";
-import { GlobalContext, Locale } from "context/GlobalContextComponent";
+import { GlobalContext } from "context/GlobalContextComponent";
 import {
   DashboardOutlined,
   FolderOpenOutlined,
@@ -17,6 +17,7 @@ import logo from "resources/logo.png";
 import "./styles.scss";
 import LocaleButton from "./LocaleButton/LocaleButton";
 import { useTranslation } from "react-i18next";
+
 const { Header, Sider, Content } = Layout;
 
 const AppLayout = () => {

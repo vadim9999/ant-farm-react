@@ -6,8 +6,6 @@ import { BrowserRouter } from "react-router-dom";
 import "antd/dist/antd.css";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import i18n from "i18next";
-import { useTranslation, initReactI18next } from "react-i18next";
 
 import "./config/i18n";
 

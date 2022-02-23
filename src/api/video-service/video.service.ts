@@ -3,10 +3,6 @@ import axios from "axios";
 import {
   DeleteMediaFile,
   DownloadMediaFile,
-  FeedNow,
-  RebootRPI,
-  SetSettingsFeeder,
-  ShutdownRPI,
   StartPreview,
   StartRecording,
   StartStream,
@@ -16,7 +12,6 @@ import {
   TakePicture,
   WaitStartPreview,
 } from "./typesArgs";
-import { SensorsData } from "./typesResponse";
 
 class VideoService {
   private API: string | null = null;

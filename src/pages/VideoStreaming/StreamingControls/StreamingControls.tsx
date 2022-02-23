@@ -1,13 +1,9 @@
-import {
-  PauseOutlined,
-  PlayCircleOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
-import { Button, Dropdown, Menu, Modal, Select } from "antd";
+import React, { useContext, useState } from "react";
+import { PauseOutlined, PlayCircleOutlined } from "@ant-design/icons";
+import { Button, Modal } from "antd";
 import { API_URL } from "api/api";
 import videoService from "api/video-service/video.service";
 import { GlobalContext } from "context/GlobalContextComponent";
-import React, { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { StreamingForm } from "./StreamingForm/StreamingForm";
 import { FormValues } from "./StreamingForm/typesStreamingForm";

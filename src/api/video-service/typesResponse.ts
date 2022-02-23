@@ -1,4 +1,4 @@
-enum SensorDHTName {
+export enum SensorDHTName {
   Sot = "sot",
   Outside = "outside",
   Arena = "arena",

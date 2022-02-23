@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "context/GlobalContextComponent";
 import CreatePicture from "./CreatePicture/CreatePicture";
 import StreamingControls from "./StreamingControls/StreamingControls";

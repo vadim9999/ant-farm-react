@@ -1,6 +1,6 @@
+import React from "react";
 import { Button, Dropdown, Menu, MenuProps } from "antd";
-import { GlobalContext, Locale } from "context/GlobalContextComponent";
-import React, { useContext } from "react";
+import { Locale } from "context/GlobalContextComponent";
 import { useTranslation } from "react-i18next";
 
 const languages = {
