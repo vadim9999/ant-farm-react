@@ -29,7 +29,6 @@ class VideoService {
   startStream = ({ userId, resolution }: StartStream) =>
     axios.post(`${this.API}/start_stream?id=${userId}`, resolution);
 
-  // TODO add getting res.data here
   stopStream = ({ userId }: StopStream) =>
     axios.get(`${this.API}/stop_stream?id=${userId}`);
 

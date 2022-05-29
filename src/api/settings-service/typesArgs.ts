@@ -1,5 +1,3 @@
-import { VideoResolution } from "types";
-
 export interface GetStreamSettings {
   userId: string;
 }

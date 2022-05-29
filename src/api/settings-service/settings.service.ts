@@ -36,7 +36,6 @@ class SettingsService {
     axios
       .post(
         `${API_URL}/set_stream_settings?id=${userId}`,
-        // TODO check it maybe it can be removed
         JSON.stringify({ youtube, key })
       )
       .then((res) => res.data);
