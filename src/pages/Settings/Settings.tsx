@@ -30,7 +30,6 @@ const Settings = () => {
   );
 
   const onGetStreamSettings = () => {
-    // TODO change naming on backend side
     settingsService
       .getStreamSettings({ userId: globalState.userId })
       .then((streamSettings) => {

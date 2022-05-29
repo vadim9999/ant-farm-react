@@ -25,7 +25,7 @@ const Router = () => {
             subTitle="Sorry, the page you visited does not exist."
             extra={
               <Link to="/">
-                <Button type="primary">Back Home</Button>
+                <Button type="primary">На головну сторінку</Button>
               </Link>
             }
           />

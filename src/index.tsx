@@ -1,4 +1,3 @@
-import AppLayout from "AppLayout/AppLayout";
 import GlobalContext from "context/GlobalContextComponent";
 import React from "react";
 import ReactDOM from "react-dom";
