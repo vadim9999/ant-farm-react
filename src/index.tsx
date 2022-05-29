@@ -8,12 +8,13 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 
 import "./config/i18n";
+import Router from "Router";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <GlobalContext>
-        <AppLayout />
+        <Router />
       </GlobalContext>
     </BrowserRouter>
   </React.StrictMode>,

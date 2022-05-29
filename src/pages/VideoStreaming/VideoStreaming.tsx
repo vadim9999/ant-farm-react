@@ -7,7 +7,6 @@ import VideoRecording from "./VideoRecording/VideoRecording";
 import { Card, Col, Popover, Row, Space } from "antd";
 import { InfoCircleOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import { routes } from "routes";
 import FeedNow from "./FeedNow/FeedNow";
 import settingsService from "api/settings-service/settings.service";
 import { useTranslation } from "react-i18next";
@@ -45,7 +44,7 @@ const VideoStreaming = () => {
                   content={
                     <div>
                       {t("popup.noSettings")}
-                      <Link to={routes.settings}>{t("popup.settings")}</Link>
+                      <Link to="/settings">{t("popup.settings")}</Link>
                     </div>
                   }
                 >

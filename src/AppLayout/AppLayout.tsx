@@ -1,8 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Layout, Menu, notification, Space, Typography } from "antd";
-import Router from "Router";
-import { Link, useLocation } from "react-router-dom";
-import { routes } from "routes";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import { getUserId } from "api/api";
 import videoService from "api/video-service/video.service";
 import { GlobalContext } from "context/GlobalContextComponent";
@@ -77,32 +75,32 @@ const AppLayout = () => {
             // defaultOpenKeys={["sub1"]}
             // style={{ height: "100%", borderRight: 0 }}
           >
-            <Menu.Item key={routes.dashboard}>
-              <Link to={routes.dashboard}>
+            <Menu.Item key="/">
+              <Link to="/">
                 <Space>
                   <DashboardOutlined />
                   {t("sidebar.dashboard")}
                 </Space>
               </Link>
             </Menu.Item>
-            <Menu.Item key={routes.videoStreaming}>
-              <Link to={routes.videoStreaming}>
+            <Menu.Item key="/video-streaming">
+              <Link to="/video-streaming">
                 <Space>
                   <VideoCameraOutlined />
                   {t("sidebar.videoStreaming")}
                 </Space>
               </Link>
             </Menu.Item>
-            <Menu.Item key={routes.mediaFiles}>
-              <Link to={routes.mediaFiles}>
+            <Menu.Item key="/media-files">
+              <Link to="/media-files">
                 <Space>
                   <FolderOpenOutlined />
                   {t("sidebar.mediaFiles")}
                 </Space>
               </Link>
             </Menu.Item>
-            <Menu.Item key={routes.settings}>
-              <Link to={routes.settings}>
+            <Menu.Item key="/settings">
+              <Link to="/settings">
                 <Space>
                   <SettingOutlined />
                   {t("sidebar.settings")}
@@ -121,7 +119,7 @@ const AppLayout = () => {
               // minHeight: 280,
             }}
           >
-            <Router />
+            <Outlet />
           </Content>
         </Layout>
       </Layout>
