@@ -32,7 +32,6 @@ const StreamingControls = ({
 
       await videoService.waitStartPreview({ userId: globalState.userId });
 
-      // TODO fix this add resolution to the global state?
       await videoService.startPreview({
         userId: globalState.userId,
         resolution: globalState.currentResolution,
@@ -57,8 +56,6 @@ const StreamingControls = ({
   const onStopStream = () => {
     videoService.stopStream({ userId: globalState.userId });
     dispatch({ isStartedPreview: false, isStreaming: false, imageUrl: "" });
-
-    // videoService.startStream({userId, resolution})
   };
 
   return (

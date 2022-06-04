@@ -36,7 +36,6 @@ interface IGlobalContextComponent {
   children: React.ReactNode;
 }
 
-// TODO find better name
 const GlobalContextComponent = ({ children }: IGlobalContextComponent) => {
   const [globalState, dispatch] = useReducer(
     (

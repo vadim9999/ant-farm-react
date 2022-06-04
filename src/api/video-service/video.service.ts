@@ -54,7 +54,6 @@ class VideoService {
     axios.post(
       `${API_URL}/start_record?id=${userId}`,
       JSON.stringify({ resolution, filename })
-      // { timeout: 10000 }
     );
 
   stopRecording = ({ userId }: StopRecording) =>

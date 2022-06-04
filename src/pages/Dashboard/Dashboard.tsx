@@ -4,8 +4,6 @@ import { SensorsData } from "api/settings-service/typesResponse";
 import sensorsService from "api/sensors-service/sensors.service";
 import { useTranslation } from "react-i18next";
 
-// TODO move to separate file styles.ts
-
 const sensorsDefualtValues = {
   sot: {
     hum: 0,

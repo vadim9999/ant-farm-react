@@ -48,8 +48,6 @@ const VideoRecording = () => {
     });
   };
 
-  // TODO move text of buttons into object
-  // TODO add timer in button
   return (
     <div>
       {globalState.isRecording ? (

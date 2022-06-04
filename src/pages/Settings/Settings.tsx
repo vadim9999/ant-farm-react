@@ -103,7 +103,6 @@ const Settings = () => {
     });
   };
 
-  //TODO split on two components and use it here
   return (
     <>
       <Row>
