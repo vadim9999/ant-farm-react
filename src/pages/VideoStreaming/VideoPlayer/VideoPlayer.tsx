@@ -118,6 +118,7 @@ const VideoPlayer = () => {
               disabled={globalState.isRecording}
               trigger={["click"]}
               placement="topCenter"
+              getPopupContainer={(triggerNode) => triggerNode}
             >
               <Button type="primary" icon={<SettingOutlined />} size="large" />
             </Dropdown>
