@@ -69,6 +69,14 @@ const Sidebar = () => {
             </Space>
           </Link>
         </Menu.Item>
+        <Menu.Item key="/about">
+          <Link to="/about">
+            <Space>
+              <SettingOutlined />
+              {t("sidebar.about")}
+            </Space>
+          </Link>
+        </Menu.Item>
       </Menu>
     </Sider>
   );

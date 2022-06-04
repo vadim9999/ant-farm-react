@@ -1,10 +1,14 @@
 const ukUa = {
   translation: {
+    about: {
+      diplomaProject: "Дипломний проект",
+    },
     appLayout: {
       header: {
         logoText: "Мурашина ферма",
       },
       sidebar: {
+        about: "Про автора",
         dashboard: "Моніторинг",
         videoStreaming: "Відеотрансляція",
         mediaFiles: "Медіафайли",

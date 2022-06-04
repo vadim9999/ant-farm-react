@@ -1,10 +1,14 @@
 const enGB = {
   translation: {
+    about: {
+      diplomaProject: 'Diploma project'
+    },
     appLayout: {
       header: {
         logoText: "Ant Farm",
       },
       sidebar: {
+        about: "About",
         dashboard: "Dashboard",
         videoStreaming: "Video streaming",
         mediaFiles: "Media files",

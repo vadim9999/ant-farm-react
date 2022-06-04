@@ -6,6 +6,7 @@ import MediaFiles from "./pages/MediaFiles/MediaFiles";
 import Dashboard from "pages/Dashboard/Dashboard";
 import AppLayout from "AppLayout/AppLayout";
 import { Button, Result } from "antd";
+import About from "pages/About/About";
 
 const Router = () => {
   return (
@@ -14,6 +15,7 @@ const Router = () => {
         <Route path="video-streaming" element={<VideoStreaming />} />
         <Route path="media-files" element={<MediaFiles />} />
         <Route path="settings" element={<Settings />} />
+        <Route path="about" element={<About />} />
         <Route index element={<Dashboard />} />
       </Route>
       <Route
