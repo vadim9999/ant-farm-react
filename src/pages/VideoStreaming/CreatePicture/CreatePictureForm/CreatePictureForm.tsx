@@ -25,10 +25,10 @@ const CreatePictureForm = ({ onCancel, onSubmit }: Props) => {
     >
       <Form.Item
         name="filename"
-        label={t("filename")}
+        label={t("fileName")}
         rules={[schema.filename]}
       >
-        <Input style={{ width: 400 }} />
+        <Input style={{ width: 300 }} />
       </Form.Item>
       <Form.Item name="quality" label={t("quality")}>
         <Select style={{ width: 120 }}>
